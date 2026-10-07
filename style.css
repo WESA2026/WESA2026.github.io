@@ -3175,3 +3175,9 @@ th {
   }
 }
 
+
+/* Keep reveal animations from causing sideways scrolling on phones */
+html,
+body {
+  overflow-x: clip;
+}
