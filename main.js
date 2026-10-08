@@ -111,13 +111,18 @@ function initPageTransition() {
       if (!href || href.startsWith("http") || target === "_blank" || href.startsWith("#") || href === current) {
         return;
       }
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+        return;
+      }
 
-      event.preventDefault();
+      // Fade out while the browser navigates instead of holding the click back
       document.body.classList.add("page-leave");
-      setTimeout(() => {
-        window.location.href = href;
-      }, 480);
     });
+  });
+
+  // Pages restored with the back button must not stay faded out
+  window.addEventListener("pageshow", () => {
+    document.body.classList.remove("page-leave");
   });
 }
 
@@ -367,20 +372,39 @@ function runFilmLoop(rail, index) {
   const speed = index % 2 === 0 ? 18 : 16;
   let offset = 0;
   let prevTs = 0;
+  let frame = 0;
+  // Reading scrollHeight forces layout, so measure only when the size can change
+  let loopHeight = rail.scrollHeight / 2;
+  const measure = () => {
+    loopHeight = rail.scrollHeight / 2;
+  };
+  window.addEventListener("resize", measure, { passive: true });
+  rail.querySelectorAll("img").forEach((img) => {
+    if (!img.complete) img.addEventListener("load", measure, { once: true });
+  });
 
   const tick = (ts) => {
     if (!prevTs) prevTs = ts;
-    const dt = (ts - prevTs) / 1000;
+    const dt = Math.min((ts - prevTs) / 1000, 0.1);
     prevTs = ts;
 
-    const loopHeight = rail.scrollHeight / 2;
     if (loopHeight > 0) {
       offset = (offset + speed * dt) % loopHeight;
       rail.style.transform = `translateY(${-offset}px) rotateX(8deg)`;
     }
 
-    requestAnimationFrame(tick);
+    frame = requestAnimationFrame(tick);
   };
 
-  requestAnimationFrame(tick);
+  // Only animate while the rail is on screen
+  const observer = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && !frame) {
+      prevTs = 0;
+      frame = requestAnimationFrame(tick);
+    } else if (!entry.isIntersecting && frame) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+    }
+  });
+  observer.observe(rail.parentElement || rail);
 }
