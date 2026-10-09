@@ -3301,3 +3301,49 @@ body::before {
 @keyframes drift-from-left {}
 @keyframes drift-from-right {}
 @keyframes mesh-float {}
+
+/* ===== 英会話部 (2026秋追加) ===== */
+.activities-card.eikaiwa {
+  border-top-color: #8b6fe0;
+}
+
+.activities-card.eikaiwa:hover {
+  background: rgba(139, 111, 224, 0.15);
+}
+
+.home-focus .activities-card.eikaiwa h3 {
+  color: #6a4fc4;
+}
+
+.home-activities-grid .activities-card-wide {
+  grid-column: 1 / -1;
+}
+
+.home-activities-grid .activities-card-wide .event-thumb {
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.page-activities .grid.grid-5 {
+  gap: 0.75rem;
+}
+
+.new-badge {
+  display: inline-block;
+  margin-left: 0.4em;
+  padding: 0.1em 0.55em;
+  border-radius: 999px;
+  background: #8b6fe0;
+  color: #fff;
+  font-size: 0.6em;
+  vertical-align: middle;
+  letter-spacing: 0.04em;
+}
+
+/* ===== 秋新歓: スマホでも新歓カードを横スクロールで全部見られるように ===== */
+@media (max-width: 640px) {
+  .welcome-marquee .marquee-row {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

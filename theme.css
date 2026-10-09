@@ -1,0 +1,861 @@
+/* =========================================================
+   WESA theme — loaded after style.css
+   One brand colour (Waseda maroon), calm neutrals, clear type.
+   The rolling photo film on the home page is left untouched.
+   ========================================================= */
+
+:root {
+  --wesa: #8c1c34;
+  --wesa-dark: #6a1426;
+  --wesa-tint: #f8eef0;
+  --ink: #1b1e27;
+  --ink-soft: #3d4250;
+  --muted: #6b7080;
+  --line: #e9e4e1;
+  --bg: #faf8f6;
+  --surface: #ffffff;
+  --gold: #b8913e;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 1px 2px rgba(27, 30, 39, 0.05), 0 2px 10px rgba(27, 30, 39, 0.05);
+  --shadow-md: 0 2px 4px rgba(27, 30, 39, 0.06), 0 12px 32px rgba(27, 30, 39, 0.1);
+  --text: var(--ink);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--wesa);
+  color: #fff;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  background: rgba(255, 255, 255, 0.86);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: saturate(1.4) blur(12px);
+}
+
+.site-header.is-scrolled {
+  box-shadow: 0 1px 0 var(--line), 0 6px 20px rgba(27, 30, 39, 0.06);
+}
+
+.logo {
+  color: var(--wesa);
+  text-shadow: none;
+  letter-spacing: 0.14em;
+}
+
+.main-nav {
+  scrollbar-width: none;
+  overflow-y: hidden;
+}
+
+.main-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.main-nav a,
+.page-officers .main-nav a {
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.main-nav a:hover,
+.main-nav a[aria-current="page"],
+.page-officers .main-nav a:hover,
+.page-officers .main-nav a[aria-current="page"] {
+  color: var(--wesa);
+}
+
+.main-nav a::after,
+.footer-links a::after {
+  background: var(--wesa);
+  height: 2px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  border-radius: 999px;
+  min-height: 44px;
+  padding: 0 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: none;
+  transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease, transform 200ms var(--ease-pop), box-shadow 200ms ease;
+}
+
+.btn::before {
+  display: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary,
+.page-officers .btn-primary {
+  background: var(--wesa);
+  border-color: var(--wesa);
+  color: #fff;
+  animation: none;
+}
+
+.btn-primary:hover {
+  background: var(--wesa-dark);
+  border-color: var(--wesa-dark);
+  box-shadow: 0 6px 18px rgba(140, 28, 52, 0.25);
+}
+
+.btn-secondary,
+.page-officers .btn-secondary {
+  background: var(--surface);
+  border: 1px solid #d9d3cf;
+  color: var(--ink);
+}
+
+.btn-secondary:hover {
+  border-color: var(--wesa);
+  color: var(--wesa);
+}
+
+.btn:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--wesa);
+  outline-offset: 3px;
+}
+
+/* ---------- Section headings ---------- */
+.section {
+  padding: 3rem 0;
+}
+
+.section h2,
+.home-focus h2 {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: clamp(1.6rem, 3.2vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  color: var(--ink);
+  text-shadow: none;
+}
+
+.section h2::after {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 3px;
+  margin-top: 0.6rem;
+  border-radius: 3px;
+  background: var(--wesa);
+}
+
+.section > .container > p,
+.section > .container > h3 {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: clamp(0.98rem, 1.6vw, 1.08rem);
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+.section .grid,
+.section .power-grid,
+.section .step-grid,
+.section .timeline {
+  margin-top: 1.5rem;
+}
+
+/* ---------- Home: under the photo film ---------- */
+.home-legacy-text {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 800;
+  color: var(--wesa);
+  text-shadow: none;
+  letter-spacing: 0.04em;
+}
+
+.wesa-highlight {
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--wesa);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.wesa-highlight::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+}
+
+.hero-catchcopy {
+  padding: 0;
+  margin-top: 0.6rem;
+  font-size: clamp(1.7rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-shadow: none;
+  animation: none;
+  clip-path: none;
+}
+
+.hero-catchcopy::after {
+  display: none;
+}
+
+.hero-copy {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-copy p {
+  color: var(--ink-soft);
+  line-height: 1.85;
+}
+
+/* ---------- Page heroes (sub pages) ---------- */
+.hero-media {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.hero-media::after {
+  background: linear-gradient(180deg, rgba(20, 10, 14, 0) 35%, rgba(20, 10, 14, 0.55) 100%);
+}
+
+.hero-watermark,
+.hero-watermark.luxe {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  -webkit-text-stroke: 0;
+  background: none;
+  font-family: "Nunito", "Noto Sans JP", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+}
+
+.hero-watermark::before,
+.hero-watermark.luxe::before {
+  display: none;
+}
+
+.hero-question {
+  font-size: 0.95rem;
+}
+
+.hero-scroll {
+  animation: none;
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem;
+}
+
+.card h3 {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: clamp(1.08rem, 1.9vw, 1.3rem);
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.card p,
+.card li,
+.card dd {
+  color: var(--ink-soft);
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.card .meta {
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--line);
+}
+
+/* Link cards: one hover language everywhere */
+.activities-card,
+.events-card,
+a.card {
+  border: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  transition: transform 220ms var(--ease-pop), box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.activities-card:hover,
+.events-card:hover,
+a.card:hover,
+.activities-card.debate:hover,
+.activities-card.speech:hover,
+.activities-card.discussion:hover,
+.activities-card.lesson:hover {
+  transform: translateY(-3px);
+  border-color: rgba(140, 28, 52, 0.35);
+  box-shadow: var(--shadow-md);
+  background: var(--surface);
+}
+
+.activities-card::before,
+.activities-card::after,
+.events-card::before,
+.events-card::after {
+  display: none;
+}
+
+/* Remove the red map pins above grid cards */
+.section.is-visible .grid > .events-card::before,
+.section.is-visible .grid > .schedule-item::before,
+.section.is-visible .grid > .event-center::before,
+.section.is-visible .grid > .activities-card::before,
+.section.is-visible .grid > .welcome-item::before,
+.section.is-visible .grid > .events-card::after,
+.section.is-visible .grid > .schedule-item::after,
+.section.is-visible .grid > .event-center::after,
+.section.is-visible .grid > .activities-card::after,
+.section.is-visible .grid > .welcome-item::after {
+  display: none;
+}
+
+.home-focus .activities-card h3,
+.home-focus .activities-card.debate h3,
+.home-focus .activities-card.speech h3,
+.home-focus .activities-card.discussion h3,
+.home-focus .activities-card.lesson h3,
+.home-focus .events-card h3 {
+  color: var(--ink);
+  font-family: "Nunito", "Noto Sans JP", sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.home-focus .activities-card h4 {
+  margin-top: 0.38rem;
+  color: var(--ink-soft);
+  font-size: clamp(0.98rem, 1.8vw, 1.1rem);
+  font-weight: 500;
+}
+
+/* Photos inside cards */
+.card img,
+.event-thumb {
+  border-radius: var(--radius-sm);
+}
+
+/* "詳しく見る →" link row */
+.external-entry {
+  display: flex;
+  align-items: center;
+  padding-top: 0.9rem;
+}
+
+.pointer-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--wesa);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  animation: none;
+}
+
+.pointer-mark::after {
+  content: "→";
+  transition: transform 200ms var(--ease-pop);
+}
+
+a.card:hover .pointer-mark::after,
+.activities-card:hover .pointer-mark::after,
+.events-card:hover .pointer-mark::after {
+  transform: translateX(4px);
+}
+
+.logo-touch,
+.card-logo-link {
+  display: none;
+}
+
+/* ---------- Activity details ---------- */
+.power-item {
+  align-items: flex-start;
+}
+
+.power-dot {
+  background: var(--wesa);
+  box-shadow: 0 0 0 4px var(--wesa-tint);
+}
+
+.timeline-step {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.step-card h3 {
+  color: var(--wesa);
+  font-family: "Nunito", "Noto Sans JP", sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+}
+
+.step-card p {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ---------- Achievements ---------- */
+.achievement-card {
+  border: 1px solid var(--line);
+}
+
+.achievement-meta dt {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.achievement-result-win,
+.achievement-result-runnerup,
+.achievement-result-third {
+  animation: none;
+  text-shadow: none;
+}
+
+.achievement-result-win::after,
+.achievement-result-runnerup::after {
+  display: none;
+}
+
+/* ---------- Deadline / join ---------- */
+.deadline-spotlight,
+.deadline-badge {
+  animation: none;
+}
+
+.deadline-badge {
+  background: var(--wesa);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  margin-top: 3.5rem;
+  padding: 2.75rem 0 3rem;
+  background: #1d1a1c;
+  border-top: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+}
+
+.site-footer p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.site-footer a {
+  color: #fff;
+}
+
+.footer-links a::after {
+  background: #fff;
+}
+
+.line-entry {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.line-entry span {
+  color: #fff;
+}
+
+/* ---------- Chat ---------- */
+.chat-fab {
+  box-shadow: 0 8px 24px rgba(140, 28, 52, 0.3);
+}
+
+.chat-widget {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.quick-list button {
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.quick-list button:hover {
+  border-color: var(--wesa);
+  color: var(--wesa);
+}
+
+/* ---------- Round 2: flatten nesting, cleaner photos ---------- */
+
+/* Sections sit on the page background; only the cards are boxes */
+.section > .container {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.section > .container > p {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Photos: no frames, cards show them edge to edge at the top */
+.event-thumb {
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+}
+
+:is(.schedule-item, .activities-card, .events-card, .event-center, .welcome-item, .officers-card) > .event-thumb:first-child {
+  width: calc(100% + 2.5rem);
+  max-width: none;
+  margin: -1.25rem -1.25rem 1rem;
+  border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+}
+
+:is(.schedule-item, .activities-card, .events-card, .event-center, .welcome-item, .officers-card) {
+  overflow: hidden;
+}
+
+.activities-card.debate,
+.activities-card.speech,
+.activities-card.discussion,
+.activities-card.lesson {
+  border-top-color: var(--line);
+}
+
+.external-entry {
+  justify-content: flex-start;
+  margin-top: auto;
+}
+
+/* Home intro block */
+.hero .wesa-highlight,
+.hero h2.wesa-highlight {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  color: var(--wesa);
+}
+
+.hero-question,
+.hero h2.hero-question {
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+}
+
+.hero-catchcopy,
+.hero h1.hero-catchcopy {
+  display: block;
+  width: auto;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: clamp(1.7rem, 4vw, 2.75rem);
+  line-height: 1.4;
+  text-shadow: none;
+}
+
+.hero-copy {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-color: var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero p {
+  color: var(--ink-soft);
+  font-weight: 500;
+  line-height: 1.85;
+}
+
+.home-focus .activities-card,
+.home-focus .events-card {
+  padding: 1.25rem;
+  min-height: 0;
+}
+
+.section .grid {
+  gap: 1.1rem;
+}
+
+/* ---------- Round 3: galleries, lists, grids ---------- */
+.gallery-main,
+.gallery-mini img {
+  border: 0;
+  outline: 0;
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+}
+
+.gallery-mini img:hover,
+.gallery-main:hover {
+  transform: scale(1.02);
+  border-color: transparent;
+}
+
+.event-detail-list li,
+.camp-page .event-detail-list li {
+  background: var(--wesa-tint);
+  border: 1px solid transparent;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.faq-item {
+  border-top-color: var(--line);
+}
+
+/* Achievements: photo + facts side by side, quieter frame */
+.achievement-card .event-thumb {
+  margin-bottom: 0;
+}
+
+/* Events on the home page: 4 across on wide screens so nothing is orphaned */
+@media (min-width: 1081px) {
+  .home-events-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1080px) and (min-width: 861px) {
+  .home-events-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Officers page: same system as the rest ---------- */
+.page-officers {
+  background: var(--bg);
+}
+
+.page-officers .container {
+  width: min(1000px, 88vw);
+}
+
+.page-officers .section > .container {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+.page-officers .section h2 {
+  color: var(--ink);
+  font-size: clamp(1.6rem, 3.2vw, 2.25rem);
+}
+
+.page-officers .section > .container > p {
+  color: var(--muted);
+  font-size: clamp(0.98rem, 1.6vw, 1.08rem);
+}
+
+.page-officers .card {
+  background: var(--surface);
+  border-color: var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.page-officers .card p,
+.page-officers .card li,
+.page-officers .card dd {
+  color: var(--ink-soft);
+}
+
+.officer-list-shell {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.officers-list .officer-item:nth-child(n),
+.page-officers .officer-item {
+  border: 1px solid var(--line);
+  border-top-color: var(--line);
+  box-shadow: var(--shadow-sm);
+  min-height: 0;
+}
+
+.page-officers .officer-item {
+  grid-template-columns: minmax(200px, 300px) 1fr;
+}
+
+.officers-list .officer-item:nth-child(n) .officer-meta h3,
+.page-officers .activity-chief-list .officer-item:nth-child(n) .officer-meta h3,
+.page-officers .officer-meta h3 {
+  color: var(--wesa);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  letter-spacing: 0.06em;
+}
+
+.page-officers .officer-meta p:first-of-type {
+  color: var(--ink);
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+}
+
+.page-officers .officer-meta p {
+  font-size: clamp(0.98rem, 1.4vw, 1.08rem);
+  line-height: 1.8;
+}
+
+.officer-item::after {
+  display: none;
+}
+
+.officer-number,
+.page-officers .officer-number {
+  border-color: var(--line);
+  color: var(--muted);
+}
+
+.officer-kicker {
+  color: var(--wesa);
+}
+
+.officer-hero-copy h1 {
+  color: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .page-officers .officer-item {
+    grid-template-columns: 1fr;
+  }
+}
+
+.deadline-badge {
+  color: #fff;
+}
+
+.page-officers .officers-list .officer-item:nth-child(n),
+.page-officers .activity-chief-list .officer-item:nth-child(n) {
+  background: var(--surface);
+  border-top-color: var(--line);
+}
+
+.page-officers .officer-thumb,
+.officer-thumb {
+  box-shadow: none;
+  border-radius: var(--radius-sm);
+}
+
+.card .deadline-badge {
+  color: #fff;
+  font-size: 0.95rem;
+  box-shadow: none;
+}
+
+/* ---------- Retire the old cyan/pink accents everywhere ---------- */
+:root {
+  --accent-a: #8c1c34;
+  --accent-b: #b4475f;
+  --accent-c: #6a1426;
+}
+
+.tab-btn[aria-selected="true"] {
+  border-color: var(--wesa);
+  background: var(--wesa-tint);
+  color: var(--wesa);
+}
+
+.chat-widget::before {
+  display: none;
+}
+
+.event-center .tab-panel li {
+  background: var(--wesa-tint);
+  border-color: transparent;
+  color: var(--ink);
+}
+
+.footer-links a:hover,
+.site-footer .footer-links a:hover {
+  color: #fff;
+  opacity: 0.8;
+}
+
+/* ---------- Forms & small headings ---------- */
+.chat-widget input,
+.card input[type="text"],
+input[data-chat-input] {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 0.6rem;
+  padding: 0 0.9rem;
+  border: 1px solid #d9d3cf;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font: inherit;
+  color: var(--ink);
+}
+
+.chat-widget input:focus,
+input[data-chat-input]:focus {
+  outline: 2px solid var(--wesa);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.join-month-title {
+  border-left-color: var(--wesa);
+  color: var(--ink);
+}
+
+.activities-card.eikaiwa,
+.activities-card.eikaiwa:hover {
+  border-top-color: var(--line);
+}
+
+.home-focus .activities-card.eikaiwa h3 {
+  color: var(--ink);
+}

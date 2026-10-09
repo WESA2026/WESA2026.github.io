@@ -159,10 +159,10 @@ function initChatWidget() {
 function setupAllChatPanels(base) {
   const qa = {
     schedule: {
-      text: "最新の日時・場所はEventsページで確認してください。未確定項目は『予定』と明記しています。",
+      text: "2026年秋新歓：Lesson（平日毎日3限・日本語メインでみんなで遊ぶ）、ピクニック（10/19（月）3〜4限）、ハロウィンパーティー（10/28（水）3限・仮装OK）。10/19と10/28は、その日のLesson（3限）がイベントに置き換わります。場所・参加方法などの詳細は公式LINEで案内します。",
       links: [
-        { label: "Events一覧", href: `${base}events.html` },
-        { label: "新歓詳細", href: `${base}welcome.html` },
+        { label: "秋新歓の日程", href: `${base}welcome.html` },
+        { label: "公式LINE", href: "https://lin.ee/WOIaKqe" },
         { label: "参加ページ", href: `${base}join.html` }
       ]
     },
@@ -175,10 +175,10 @@ function setupAllChatPanels(base) {
       ]
     },
     frequency: {
-      text: "活動頻度は週2回程度が目安です。時期により増減するため、最新情報は日程ページで確認してください。",
+      text: "定例活動は毎週あります。Lesson：平日毎日3限／Discussion：月・木・金 3〜5限／Debate：金曜4限／Speech：金曜5限／英会話部：水曜4・5限（戸山キャンパス または オンライン）。好きな活動に参加できます。",
       links: [
-        { label: "新歓日程", href: `${base}events.html` },
-        { label: "Events一覧", href: `${base}events.html` },
+        { label: "Activities一覧", href: `${base}activities.html` },
+        { label: "英会話部", href: `${base}eikaiwa.html` },
         { label: "Join", href: `${base}join.html` }
       ]
     },
@@ -191,11 +191,11 @@ function setupAllChatPanels(base) {
       ]
     },
     diff: {
-      text: "Debateは論理競技、Speechは発表、Discussionは対話、Lessonは基礎練習が中心です。",
+      text: "Lessonは日本語メインでみんなで遊ぶ活動、英会話部はLessonと競技活動の間で中級者・留学経験者向けに英語だけでゲームをする活動です。Debateは論理競技、Speechは発表、Discussionは対話（議論）が中心の競技活動です。",
       links: [
         { label: "Activities一覧", href: `${base}activities.html` },
-        { label: "Debate", href: `${base}debate.html` },
-        { label: "Speech", href: `${base}speech.html` }
+        { label: "英会話部", href: `${base}eikaiwa.html` },
+        { label: "Debate", href: `${base}debate.html` }
       ]
     }
   };
@@ -245,6 +245,10 @@ function renderAnswer(payload, answerNode, relatedNode) {
   payload.links.forEach((link) => {
     const a = document.createElement("a");
     a.href = link.href;
+    if (link.href.startsWith("http")) {
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+    }
     a.textContent = link.label;
     relatedNode.appendChild(a);
   });

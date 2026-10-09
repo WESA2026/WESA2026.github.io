@@ -1,0 +1,463 @@
+/* =========================================================
+   WESA layout — CHG-SITE-004 v1 (layout refresh draft)
+   Loaded after style.css and theme.css. Colours come from theme.css.
+   Changes arrangement and spacing only; text, dates and links are untouched.
+   The rolling photo film on the home page (.home-film / .film-*) is NOT styled here.
+   ========================================================= */
+
+/* ---------- Common: header ---------- */
+@media (min-width: 861px) {
+  .main-nav {
+    gap: 1.6rem;
+  }
+
+  .main-nav a {
+    font-family: "Nunito", "Noto Sans JP", sans-serif;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* ---------- Common: section heading block ----------
+   Heading on the left, short lead on the right (PC); stacked on phones.
+   A thin rule under the whole block replaces the short bar under h2. */
+.section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.6rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.section .section-head h2::after {
+  display: none;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
+.section-head p,
+.section-head h3 {
+  margin: 0;
+  color: var(--muted);
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: clamp(0.98rem, 1.6vw, 1.08rem);
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+@media (min-width: 861px) {
+  .section-head {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: end;
+    column-gap: 3rem;
+  }
+}
+
+.section .section-head + .grid,
+.section .section-head + .card,
+.section .section-head + .table-wrap,
+.section .section-head + .gallery,
+.section .section-head + .welcome-marquee,
+.section .section-head + dl {
+  margin-top: 1.75rem;
+}
+
+/* ---------- Pages using the refreshed layout (.lx) ---------- */
+.lx .section {
+  padding: clamp(2.75rem, 6vw, 4.75rem) 0;
+}
+
+.lx .section + .section {
+  border-top: 1px solid rgba(233, 228, 225, 0.6);
+}
+
+.lx .section .hero-actions {
+  margin-top: 1.75rem;
+}
+
+/* English section titles read as labels: rounder Latin face */
+.lx .section-head h2 {
+  font-size: clamp(1.75rem, 3.6vw, 2.6rem);
+  line-height: 1.25;
+}
+
+/* ---------- Hero: copy and photo side by side (PC) ---------- */
+.hero-split {
+  padding: clamp(1.5rem, 4vw, 3rem) 0 clamp(2rem, 5vw, 3.5rem);
+}
+
+.hero-split .hero-copy {
+  margin-top: 1rem;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0.5rem 0 0;
+}
+
+@media (min-width: 861px) {
+  .hero-split .container {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    align-items: center;
+    column-gap: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .hero-split .hero-copy {
+    order: -1;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .hero-split .hero-actions {
+    margin-top: 1.5rem;
+  }
+}
+
+/* ---------- Home: line under the photo film ---------- */
+.page-home .home-legacy {
+  padding: 0.75rem 0 0;
+}
+
+/* ---------- Numbered items (schedule cards, activity rows, activities list) ---------- */
+.lx-numbered {
+  counter-reset: lx-item;
+}
+
+.lx-numbered > * {
+  counter-increment: lx-item;
+}
+
+.lx-numbered > * > h3::before {
+  content: counter(lx-item, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--wesa);
+  font-family: "Nunito", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+/* ---------- Home: activities as alternating rows (PC) ---------- */
+@media (min-width: 861px) {
+  .home-activities-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .home-activities-grid > .activities-card,
+  .home-activities-grid > .activities-card.activities-card-wide {
+    display: grid;
+    grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
+    grid-template-rows: 1fr auto auto auto 1fr;
+    column-gap: 0;
+    padding: 0;
+  }
+
+  .home-activities-grid > .activities-card > .event-thumb:first-child,
+  .home-activities-grid .activities-card-wide .event-thumb {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    aspect-ratio: 16 / 9;
+    margin: 0;
+    border-radius: calc(var(--radius) - 1px) 0 0 calc(var(--radius) - 1px);
+  }
+
+  .home-activities-grid > .activities-card > :not(.event-thumb) {
+    grid-column: 2;
+    padding-inline: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .home-activities-grid > .activities-card > h3 { grid-row: 2; }
+  .home-activities-grid > .activities-card > h4,
+  .home-activities-grid > .activities-card > p { grid-row: 3; }
+  .home-activities-grid > .activities-card > .external-entry { grid-row: 4; }
+
+  /* every second row: photo on the right */
+  .home-activities-grid > .activities-card:nth-child(even) {
+    grid-template-columns: minmax(0, 9fr) minmax(0, 11fr);
+  }
+
+  .home-activities-grid > .activities-card:nth-child(even) > .event-thumb:first-child {
+    grid-column: 2;
+    border-radius: 0 calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0;
+  }
+
+  .home-activities-grid > .activities-card:nth-child(even) > :not(.event-thumb) {
+    grid-column: 1;
+  }
+}
+
+/* ---------- Home: events as a quiet photo grid (no boxes) ---------- */
+.home-events-grid > .events-card,
+.home-events-grid > .events-card:hover {
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.home-events-grid > .events-card > .event-thumb:first-child {
+  width: 100%;
+  margin: 0 0 0.9rem;
+  border-radius: var(--radius-sm);
+  transition: transform 220ms var(--ease-pop), box-shadow 220ms ease;
+}
+
+.home-events-grid > .events-card:hover {
+  transform: none;
+}
+
+.home-events-grid > .events-card:hover > .event-thumb:first-child {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.home-events-grid > .events-card .meta {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 860px) {
+  .home-events-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-events-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Home: officers — one large team photo, then title row with link (PC) ----------
+   CHG-SITE-005 v1: photo keeps its 16:9 crop, shown at full content width. */
+@media (min-width: 861px) {
+  .home-officers-section .officers-card {
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto auto;
+    column-gap: 2rem;
+    padding: 0 0 1.75rem;
+  }
+
+  .home-officers-section .officers-card > .event-thumb:first-child {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 0 0 1.5rem;
+    border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+  }
+
+  .home-officers-section .officers-card > :not(.event-thumb) {
+    padding-inline: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .home-officers-section .officers-card > h3 { grid-column: 1; grid-row: 2; }
+  .home-officers-section .officers-card > p { grid-column: 1; grid-row: 3; }
+
+  .home-officers-section .officers-card > .external-entry {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    align-self: center;
+    padding-top: 0;
+  }
+}
+
+/* ---------- Closing band (full width, brand colour) ---------- */
+.lx .section.lx-band {
+  margin-top: clamp(1rem, 3vw, 2rem);
+  padding: clamp(3rem, 7vw, 5rem) 0;
+  background: var(--wesa);
+  border-top: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.lx-band .section-head {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.lx-band .section-head h2,
+.lx-band .section-head p {
+  color: #fff;
+}
+
+.lx-band .section-head p {
+  opacity: 0.86;
+}
+
+.lx-band .hero-actions {
+  justify-content: center;
+}
+
+.lx-band .btn-primary,
+.lx-band .hero-actions .btn-secondary:only-child {
+  background: #fff;
+  border-color: #fff;
+  color: var(--wesa);
+}
+
+.lx-band .btn-secondary {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #fff;
+}
+
+.lx-band .btn-primary:hover,
+.lx-band .btn-secondary:hover {
+  background: var(--wesa-tint);
+  border-color: var(--wesa-tint);
+  color: var(--wesa-dark);
+}
+
+.lx .section.lx-band.js-reveal,
+.lx .section.lx-band.js-reveal.is-visible {
+  border-radius: 0;
+}
+
+/* no gap between a closing band and the dark footer */
+main:has(> .lx-band:last-child) + .site-footer {
+  margin-top: 0;
+}
+
+/* ---------- Activities page: numbered list rows ---------- */
+.page-activities .grid.grid-5 {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.page-activities .grid.grid-5 > .card.activities-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.35rem;
+  padding: 1.6rem 0.25rem;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.page-activities .grid-5 > .activities-card:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--line);
+  background: none;
+}
+
+.page-activities .grid-5 > .activities-card .meta {
+  margin-top: 0.2rem;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.page-activities .grid-5 > .activities-card .hero-actions {
+  margin-top: 0.6rem;
+}
+
+@media (min-width: 861px) {
+  .page-activities .grid-5 > .activities-card {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) auto;
+    grid-template-rows: auto auto;
+    column-gap: 2rem;
+    align-items: center;
+    padding: 1.9rem 0.25rem;
+  }
+
+  .page-activities .grid-5 > .activities-card > h3 {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .page-activities .grid-5 > .activities-card > p:not(.meta) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .page-activities .grid-5 > .activities-card > .meta {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .page-activities .grid-5 > .activities-card > .hero-actions {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    margin-top: 0;
+  }
+}
+
+/* ---------- Welcome page ---------- */
+.lx .welcome-marquee .marquee-row {
+  border-style: solid;
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.lx .table-wrap table {
+  background: var(--surface);
+}
+
+.lx .table-wrap th {
+  background: var(--wesa-tint);
+  color: var(--ink);
+}
+
+.lx .table-wrap th,
+.lx .table-wrap td {
+  border-color: var(--line);
+}
+
+/* ---------- Common: footer ---------- */
+.site-footer .footer-row {
+  gap: 0.4rem;
+}
+
+.site-footer .join-entry-links {
+  justify-content: flex-start;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.site-footer .join-entry-links .line-entry {
+  margin-bottom: 0;
+  box-shadow: none;
+}
+
+.site-footer .footer-links {
+  margin-bottom: 0.5rem;
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 860px) {
+  .lx .section {
+    padding: 2.5rem 0;
+  }
+
+  .hero-split {
+    padding-top: 0.75rem;
+  }
+
+  .site-footer .join-entry-links {
+    justify-content: center;
+  }
+
+  /* keep the contact lines clear of the floating 質問する button */
+  .site-footer {
+    padding-bottom: 5.5rem;
+  }
+}
