@@ -19,18 +19,16 @@
   <meta name="twitter:site" content="@wesa_shinkan">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="theme.css">
-  <link rel="stylesheet" href="layout.css">
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="musu.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap"></noscript>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-row">
       <a href="index.html" class="logo logo-with-mark">
-        <img class="logo-icon" src="WESA_icon.png" alt="" aria-hidden="true">
+        <img class="logo-icon" src="WESA_icon.png" width="397" height="397" alt="" aria-hidden="true">
         <span class="logo-text">WESA</span>
       </a>
       <nav class="main-nav" aria-label="主要ナビゲーション">
@@ -51,7 +49,7 @@
     <section class="hero">
       <div class="container">
         <div class="hero-media js-reveal">
-          <img src="chat-members.jpg" alt="質問対応イメージ">
+          <img src="chat-members.jpg" width="1280" height="960" alt="質問対応イメージ">
         </div>
         <div class="hero-copy js-reveal">
           <h1>質問する</h1>
@@ -79,6 +77,19 @@
           <div class="answer-box" data-chat-answer>質問を選択してください。</div>
           <div class="related-links" data-chat-related></div>
         </div>
+      </div>
+    </section>
+    <section class="section js-reveal" aria-label="よくある質問">
+      <div class="container">
+        <h2>よくある質問</h2>
+        <p>Chatbotと同じ内容を、一覧でも読めます。</p>
+        <dl class="card">
+          <div class="faq-item"><dt>Q: 新歓日程を教えて</dt><dd>A: 2026年秋新歓：Lesson（平日毎日3限・日本語メインでみんなで遊ぶ）、ピクニック（10/19（月）3〜4限）、ハロウィンパーティー（10/28（水）3限・仮装OK）。10/19と10/28は、その日のLesson（3限）がイベントに置き換わります。場所・参加方法などの詳細は公式LINEで案内します。</dd></div>
+          <div class="faq-item"><dt>Q: 初心者でも参加できる？</dt><dd>A: 初心者でも参加できます。レベル別の練習メニューで開始し、初回は見学だけでも可能です。</dd></div>
+          <div class="faq-item"><dt>Q: 活動は週何回？</dt><dd>A: 定例活動は毎週あります。Lesson：平日毎日3限／Discussion：月・木・金 3〜5限／Debate：金曜4限／Speech：金曜5限／英会話部：水曜4・5限（戸山キャンパス または オンライン）。好きな活動に参加できます。</dd></div>
+          <div class="faq-item"><dt>Q: 参加費はある？</dt><dd>A: 参加費は不明/未確定の項目があります。確定後、各イベント詳細ページで案内します。</dd></div>
+          <div class="faq-item"><dt>Q: 各活動（英会話部含む）の違いは？</dt><dd>A: Lessonは日本語メインでみんなで遊ぶ活動、英会話部はLessonと競技活動の間で中級者・留学経験者向けに英語だけでゲームをする活動です。Debateは論理競技、Speechは発表、Discussionは対話（議論）が中心の競技活動です。</dd></div>
+        </dl>
       </div>
     </section>
   </main>

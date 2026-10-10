@@ -74,19 +74,141 @@
   <!-- ===== 既存の読み込み ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;800&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="theme.css">
-  <link rel="stylesheet" href="layout.css">
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="musu.css">
-  <script src="opening.js"></script>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap"></noscript>
+  <link rel="stylesheet" href="site.css">
+  <!-- opening:start (source: opening.js) -->
+  <script>
+/* =========================================================
+   WESA opening — CHG-SITE-006 v1
+   Short logo opening for the home page (about 1.9s).
+   - First view in a browser session only (sessionStorage). If storage
+     cannot be read or written, the opening is skipped.
+   - Not shown with prefers-reduced-motion: reduce.
+   - Tap, click, key or wheel skips it.
+   - All page content is in the HTML from the start. Without JS this file
+     does nothing; if it fails, the CSS cover fades by itself at 3.2s.
+   Loaded in <head> without defer so the cover is up before first paint.
+   ========================================================= */
+(function () {
+  var root = document.documentElement;
+  var KEY = "wesa-opening";
+  var play = false;
+
+  try {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce && !window.sessionStorage.getItem(KEY)) {
+      window.sessionStorage.setItem(KEY, "1");
+      play = window.sessionStorage.getItem(KEY) === "1";
+    }
+  } catch (e) {
+    play = false;
+  }
+  if (!play) return;
+
+  root.classList.add("op-on");
+
+  var overlay = null;
+  var timers = [];
+  var done = false;
+  var leaving = false;
+  var failsafe = setTimeout(cleanup, 4000);
+
+  function later(fn, ms) {
+    timers.push(setTimeout(fn, ms));
+  }
+
+  function cleanup() {
+    if (done) return;
+    done = true;
+    clearTimeout(failsafe);
+    timers.forEach(clearTimeout);
+    ["pointerdown", "keydown", "wheel", "touchstart"].forEach(function (type) {
+      window.removeEventListener(type, skip, true);
+    });
+    if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    root.classList.remove("op-on");
+  }
+
+  function skip() {
+    if (done || !overlay) return;
+    leaving = true;
+    overlay.classList.add("is-skipping");
+    later(cleanup, 280);
+  }
+
+  function leave() {
+    if (done || leaving) return;
+    leaving = true;
+    var mark = overlay.querySelector(".op__mark");
+    var target = document.querySelector(".site-header .logo-icon");
+    if (mark && target) {
+      var a = mark.getBoundingClientRect();
+      var b = target.getBoundingClientRect();
+      if (a.width && b.width) {
+        var dx = b.left + b.width / 2 - (a.left + a.width / 2);
+        var dy = b.top + b.height / 2 - (a.top + a.height / 2);
+        var s = b.width / a.width;
+        mark.style.transform = "translate(-50%, -58%) translate(" + dx + "px, " + dy + "px) scale(" + s + ")";
+      }
+    }
+    overlay.classList.add("is-leaving");
+    later(cleanup, 760);
+  }
+
+  function build() {
+    if (done) return;
+    // A slow start would make the opening feel like a delay: skip it instead.
+    if (window.performance && performance.now() > 2500) {
+      cleanup();
+      return;
+    }
+
+    overlay = document.createElement("div");
+    overlay.className = "op";
+    overlay.setAttribute("aria-hidden", "true");
+
+    var word = "創立70年以上";
+    var letters = "";
+    for (var i = 0; i < word.length; i++) {
+      letters += '<span style="--i:' + i + '">' + word.charAt(i) + "</span>";
+    }
+
+    overlay.innerHTML =
+      '<div class="op__panel op__panel--top"></div>' +
+      '<div class="op__panel op__panel--bottom"></div>' +
+      '<div class="op__seam"></div>' +
+      '<div class="op__mark">' +
+      '<span class="op__ring"></span>' +
+      '<img class="op__logo" src="WESA_icon.png" alt="">' +
+      '<p class="op__word">' + letters + "</p>" +
+      "</div>";
+
+    document.body.appendChild(overlay);
+    root.classList.remove("op-on");
+
+    ["pointerdown", "keydown", "wheel", "touchstart"].forEach(function (type) {
+      window.addEventListener(type, skip, { capture: true, passive: true });
+    });
+
+    later(leave, 1150);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", build, { once: true });
+  } else {
+    build();
+  }
+})();
+  </script>
+  <!-- opening:end -->
 </head>
 <body class="page-home lx">
   <header class="site-header">
     <div class="container header-row">
       <a href="index.html" class="logo logo-with-mark">
-        <img class="logo-icon" src="WESA_icon.png" alt="" aria-hidden="true">
+        <img class="logo-icon" src="WESA_icon.png" width="397" height="397" alt="" aria-hidden="true">
         <span class="logo-text">WESA</span>
       </a>
       <nav class="main-nav" aria-label="主要ナビゲーション">
@@ -108,30 +230,30 @@
       <div class="container film-wrap">
         <div class="film-rail left">
           <div class="rail-inner">
-            <img src="winter-camp-2026-group.jpg" alt="WESA Winter Camp 2026の集合写真">
-            <img src="wesa-members-selfie.jpg" alt="教室で笑顔で写るWESAのメンバー">
-            <img src="wesa-members-classroom.jpg" alt="教室でポーズをとるWESAのメンバー">
-            <img src="transfer-ceremony-2025.jpg" alt="WESA Transfer Ceremony 2025の集合写真">
-            <img src="sub-summer-camp-2.jpg" alt="体育館でレクを楽しむWESAのメンバー">
-            <img src="winter-camp-2026-group.jpg" alt="WESA Winter Camp 2026の集合写真">
-            <img src="wesa-members-selfie.jpg" alt="教室で笑顔で写るWESAのメンバー">
-            <img src="wesa-members-classroom.jpg" alt="教室でポーズをとるWESAのメンバー">
-            <img src="transfer-ceremony-2025.jpg" alt="WESA Transfer Ceremony 2025の集合写真">
-            <img src="sub-summer-camp-2.jpg" alt="体育館でレクを楽しむWESAのメンバー">
+            <img fetchpriority="high" src="winter-camp-2026-group.jpg" srcset="winter-camp-2026-group-640.jpg 640w, winter-camp-2026-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="WESA Winter Camp 2026の集合写真">
+            <img src="wesa-members-selfie.jpg" srcset="wesa-members-selfie-640.jpg 640w, wesa-members-selfie.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="教室で笑顔で写るWESAのメンバー">
+            <img src="wesa-members-classroom.jpg" srcset="wesa-members-classroom-640.jpg 640w, wesa-members-classroom.jpg 853w" sizes="(max-width: 1136px) 44vw, 500px" width="853" height="1280" alt="教室でポーズをとるWESAのメンバー">
+            <img src="transfer-ceremony-2025.jpg" srcset="transfer-ceremony-2025-640.jpg 640w, transfer-ceremony-2025.jpg 960w" sizes="(max-width: 1136px) 44vw, 500px" width="960" height="1280" alt="WESA Transfer Ceremony 2025の集合写真">
+            <img src="sub-summer-camp-2.jpg" srcset="sub-summer-camp-2-640.jpg 640w, sub-summer-camp-2.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="体育館でレクを楽しむWESAのメンバー">
+            <img src="winter-camp-2026-group.jpg" srcset="winter-camp-2026-group-640.jpg 640w, winter-camp-2026-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="WESA Winter Camp 2026の集合写真">
+            <img src="wesa-members-selfie.jpg" srcset="wesa-members-selfie-640.jpg 640w, wesa-members-selfie.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="教室で笑顔で写るWESAのメンバー">
+            <img src="wesa-members-classroom.jpg" srcset="wesa-members-classroom-640.jpg 640w, wesa-members-classroom.jpg 853w" sizes="(max-width: 1136px) 44vw, 500px" width="853" height="1280" alt="教室でポーズをとるWESAのメンバー">
+            <img src="transfer-ceremony-2025.jpg" srcset="transfer-ceremony-2025-640.jpg 640w, transfer-ceremony-2025.jpg 960w" sizes="(max-width: 1136px) 44vw, 500px" width="960" height="1280" alt="WESA Transfer Ceremony 2025の集合写真">
+            <img src="sub-summer-camp-2.jpg" srcset="sub-summer-camp-2-640.jpg 640w, sub-summer-camp-2.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="体育館でレクを楽しむWESAのメンバー">
           </div>
         </div>
         <div class="film-rail right">
           <div class="rail-inner">
-            <img src="sub-summer-camp-group.jpg" alt="体育館で撮影したWESA合宿の集合写真">
-            <img src="camp-team-shirts-group.jpg" alt="チームTシャツで集まるWESA合宿の集合写真">
-            <img src="summer-camp-group.jpg" alt="WESA Summer Campの集合写真">
-            <img src="spring-camp-group.jpg" alt="雪の積もる宿舎前で撮影したWESA合宿の集合写真">
-            <img src="winter-camp-2026-venue.jpg" alt="WESA Winter Camp 2026の会場での集合写真">
-            <img src="sub-summer-camp-group.jpg" alt="体育館で撮影したWESA合宿の集合写真">
-            <img src="camp-team-shirts-group.jpg" alt="チームTシャツで集まるWESA合宿の集合写真">
-            <img src="summer-camp-group.jpg" alt="WESA Summer Campの集合写真">
-            <img src="spring-camp-group.jpg" alt="雪の積もる宿舎前で撮影したWESA合宿の集合写真">
-            <img src="winter-camp-2026-venue.jpg" alt="WESA Winter Camp 2026の会場での集合写真">
+            <img fetchpriority="high" src="sub-summer-camp-group.jpg" srcset="sub-summer-camp-group-640.jpg 640w, sub-summer-camp-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="体育館で撮影したWESA合宿の集合写真">
+            <img src="camp-team-shirts-group.jpg" srcset="camp-team-shirts-group-640.jpg 640w, camp-team-shirts-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="チームTシャツで集まるWESA合宿の集合写真">
+            <img src="summer-camp-group.jpg" srcset="summer-camp-group-640.jpg 640w, summer-camp-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="WESA Summer Campの集合写真">
+            <img src="spring-camp-group.jpg" srcset="spring-camp-group-640.jpg 640w, spring-camp-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="雪の積もる宿舎前で撮影したWESA合宿の集合写真">
+            <img src="winter-camp-2026-venue.jpg" srcset="winter-camp-2026-venue-640.jpg 640w, winter-camp-2026-venue.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="WESA Winter Camp 2026の会場での集合写真">
+            <img src="sub-summer-camp-group.jpg" srcset="sub-summer-camp-group-640.jpg 640w, sub-summer-camp-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="体育館で撮影したWESA合宿の集合写真">
+            <img src="camp-team-shirts-group.jpg" srcset="camp-team-shirts-group-640.jpg 640w, camp-team-shirts-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="チームTシャツで集まるWESA合宿の集合写真">
+            <img src="summer-camp-group.jpg" srcset="summer-camp-group-640.jpg 640w, summer-camp-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="WESA Summer Campの集合写真">
+            <img src="spring-camp-group.jpg" srcset="spring-camp-group-640.jpg 640w, spring-camp-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="雪の積もる宿舎前で撮影したWESA合宿の集合写真">
+            <img src="winter-camp-2026-venue.jpg" srcset="winter-camp-2026-venue-640.jpg 640w, winter-camp-2026-venue.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="WESA Winter Camp 2026の会場での集合写真">
           </div>
         </div>
       </div>
@@ -146,7 +268,7 @@
     <section class="hero hero-home hero-split">
       <div class="container">
         <div class="hero-media js-reveal">
-          <img src="transfer-ceremony-group.jpg" alt="活動の様子" loading="lazy" decoding="async">
+          <img src="transfer-ceremony-group.jpg" width="1280" height="647" alt="活動の様子" loading="lazy" decoding="async">
         </div>
         <div class="hero-copy js-reveal">
           <h2 class="wesa-highlight">サークルの目指すところ</h2>
@@ -168,19 +290,19 @@
         </div>
         <div class="grid grid-3 lx-numbered">
           <article class="card schedule-item">
-            <img class="event-thumb" src="lesson-photo.jpg" alt="Lessonでゲームを楽しむWESAのメンバー" loading="lazy" decoding="async">
+            <img class="event-thumb" src="lesson-photo.jpg" width="1280" height="960" alt="Lessonでゲームを楽しむWESAのメンバー" loading="lazy" decoding="async">
             <h3>Lesson</h3>
             <p>日本語メインでみんなで遊ぼう！WESAの雰囲気を知りたい人におすすめ。</p>
             <p class="meta">日時：平日毎日 3限<br>※10/19（月）・10/28（水）はイベントに置き換え</p>
           </article>
           <article class="card schedule-item">
-            <img class="event-thumb" src="shinkan-hanami.jpg" alt="屋外で集まるWESAのメンバー（過去の新歓）" loading="lazy" decoding="async">
+            <img class="event-thumb" src="shinkan-hanami.jpg" width="1280" height="906" alt="屋外で集まるWESAのメンバー（過去の新歓）" loading="lazy" decoding="async">
             <h3>ピクニック</h3>
             <p>運動しながらおしゃべりして、WESAを知ろう！</p>
             <p class="meta">日時：10/19（月）3〜4限<br>※この日のLesson（3限）はピクニックになります</p>
           </article>
           <article class="card schedule-item">
-            <img class="event-thumb" src="chat-members.jpg" alt="教室で笑顔で写るWESAのメンバー" loading="lazy" decoding="async">
+            <img class="event-thumb" src="chat-members.jpg" width="1280" height="960" alt="教室で笑顔で写るWESAのメンバー" loading="lazy" decoding="async">
             <h3>ハロウィンパーティー</h3>
             <p>仮装OK！ゲームやおしゃべりでハロウィンを楽しもう！</p>
             <p class="meta">日時：10/28（水）3限<br>※この日のLesson（3限）はハロウィンパーティーになります</p>
@@ -201,7 +323,7 @@
         </div>
         <div class="grid grid-4 home-activities-grid lx-numbered">
           <a class="card activities-card debate" href="debate.html">
-            <img class="event-thumb" src="debate-photo.jpg" alt="Debateサムネイル" loading="lazy" decoding="async">
+            <img class="event-thumb" src="debate-photo.jpg" width="1280" height="720" alt="Debateサムネイル" loading="lazy" decoding="async">
             <h3>Debate</h3>
             <h4>論理をもとにジャッジを説得しよう！</h4>
             <div class="external-entry">
@@ -212,7 +334,7 @@
           </a>
 
           <a class="card activities-card speech" href="speech.html">
-            <img class="event-thumb" src="speech-thumbnail.jpg" alt="Speechサムネイル" loading="lazy" decoding="async">
+            <img class="event-thumb" src="speech-thumbnail.jpg" width="1280" height="853" alt="Speechサムネイル" loading="lazy" decoding="async">
             <h3>Speech</h3>
             <p>8分で自分だけのメッセージを伝えよう！</p>
             <div class="external-entry">
@@ -223,7 +345,7 @@
           </a>
 
           <a class="card activities-card discussion" href="discussion.html">
-            <img class="event-thumb" src="discussion-main.jpg" alt="Discussionサムネイル" loading="lazy" decoding="async">
+            <img class="event-thumb" src="discussion-main.jpg" width="1280" height="720" alt="Discussionサムネイル" loading="lazy" decoding="async">
             <h3>Discussion</h3>
             <p>日本政府の立場から考え議論しあおう！</p>
             <div class="external-entry">
@@ -234,7 +356,7 @@
           </a>
 
           <a class="card activities-card lesson" href="lesson.html">
-            <img class="event-thumb" src="wesa-members-selfie.jpg" alt="Lessonサムネイル" loading="lazy" decoding="async">
+            <img class="event-thumb" src="wesa-members-selfie.jpg" srcset="wesa-members-selfie-640.jpg 640w, wesa-members-selfie.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="Lessonサムネイル" loading="lazy" decoding="async">
             <h3>Lesson</h3>
             <p>みんなと楽しく遊ぼう！</p>
             <div class="external-entry">
@@ -245,7 +367,7 @@
           </a>
 
           <a class="card activities-card eikaiwa activities-card-wide" href="eikaiwa.html">
-            <img class="event-thumb" src="wesa-members-classroom.jpg" alt="英会話部サムネイル" loading="lazy" decoding="async">
+            <img class="event-thumb" src="wesa-members-classroom.jpg" srcset="wesa-members-classroom-640.jpg 640w, wesa-members-classroom.jpg 853w" sizes="(max-width: 1136px) 44vw, 500px" width="853" height="1280" alt="英会話部サムネイル" loading="lazy" decoding="async">
             <h3>英会話部 <span class="new-badge">NEW</span></h3>
             <p>毎週水曜4・5限、英語だけでゲームしよう！Lessonと競技活動の間の、中級者・留学経験者向け。</p>
             <div class="external-entry">
@@ -266,7 +388,7 @@
         </div>
         <div class="grid grid-4 home-events-grid">
           <a class="card events-card" href="summer-camp.html">
-            <img class="event-thumb" src="summer-camp-group.jpg" alt="Summer Campサムネイル" loading="lazy" decoding="async">
+            <img class="event-thumb" src="summer-camp-group.jpg" srcset="summer-camp-group-640.jpg 640w, summer-camp-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="Summer Campサムネイル" loading="lazy" decoding="async">
             <h3>Summer Camp</h3>
             <p>3代でやる最大のイベント！オリセンで通いで行うよ！！</p>
             <p class="meta">2026年8月（終了）</p>
@@ -278,7 +400,7 @@
           </a>
 
           <a class="card events-card" href="sub-summer-camp.html">
-            <img class="event-thumb" src="sub-summer-camp-group.jpg" alt="Sub Summer Campサムネイル" loading="lazy" decoding="async">
+            <img class="event-thumb" src="sub-summer-camp-group.jpg" srcset="sub-summer-camp-group-640.jpg 640w, sub-summer-camp-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="Sub Summer Campサムネイル" loading="lazy" decoding="async">
             <h3>Sub Summer Camp</h3>
             <p>英語を忘れて3日間遊ぼう！！</p>
             <p class="meta">2026年9月（終了）</p>
@@ -290,7 +412,7 @@
           </a>
 
           <a class="card events-card" href="winter-camp.html">
-            <img class="event-thumb" src="winter-camp-2026-venue.jpg" alt="Winter Campサムネイル" loading="lazy" decoding="async">
+            <img class="event-thumb" src="winter-camp-2026-venue.jpg" srcset="winter-camp-2026-venue-640.jpg 640w, winter-camp-2026-venue.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="Winter Campサムネイル" loading="lazy" decoding="async">
             <h3>Winter Camp</h3>
             <p>冬にアクティビティ活動に集中！！新しいことが学べるよ！！</p>
             <p class="meta">2月予定</p>
@@ -302,7 +424,7 @@
           </a>
 
           <a class="card events-card" href="spring-camp.html">
-            <img class="event-thumb" src="spring-camp-group.jpg" alt="Spring Campサムネイル" loading="lazy" decoding="async">
+            <img class="event-thumb" src="spring-camp-group.jpg" srcset="spring-camp-group-640.jpg 640w, spring-camp-group.jpg 1280w" sizes="(max-width: 1136px) 44vw, 500px" width="1280" height="960" alt="Spring Campサムネイル" loading="lazy" decoding="async">
             <h3>Spring Camp</h3>
             <p>みんなで英語を忘れてスキー・スノボしよう！！</p>
             <p class="meta">3月予定</p>
@@ -324,7 +446,7 @@
         </div>
         <div class="grid">
           <a class="card officers-card" href="officers.html">
-            <img class="event-thumb" src="officers-2026.jpg" alt="幹部紹介サムネイル" loading="lazy" decoding="async">
+            <img class="event-thumb" src="officers-2026.jpg" width="1280" height="960" alt="幹部紹介サムネイル" loading="lazy" decoding="async">
             <h3>WESA 幹部紹介</h3>
             <p>役職・担当・メッセージを掲載しています。</p>
             <div class="external-entry">
@@ -354,7 +476,7 @@
     <div class="container footer-row">
       <div class="join-entry-links" aria-label="入会リンク">
         <a class="line-entry home-instagram-entry" href="https://www.instagram.com/wesa_2026/" target="_blank" rel="noopener noreferrer">
-          <img class="home-instagram-photo" src="wesa-logo-2026.jpg" alt="Instagramリンク画像" loading="lazy" decoding="async">
+          <img class="home-instagram-photo" src="wesa-logo-2026.jpg" width="397" height="397" alt="Instagramリンク画像" loading="lazy" decoding="async">
           <span>Instagram こちらから</span>
         </a>
         <a class="line-entry home-x-entry" href="https://x.com/wesa_shinkan" target="_blank" rel="noopener noreferrer">
@@ -362,7 +484,7 @@
           <span>新歓Xはこちらから</span>
         </a>
         <a class="line-entry home-line-entry" href="https://lin.ee/WOIaKqe" target="_blank" rel="noopener noreferrer">
-          <img class="home-line-photo" src="line-icon.jpg" alt="LINEリンク画像" loading="lazy" decoding="async">
+          <img class="home-line-photo" src="line-icon.jpg" width="262" height="180" alt="LINEリンク画像" loading="lazy" decoding="async">
           <span>公式ラインはこちらから</span>
         </a>
       </div>
