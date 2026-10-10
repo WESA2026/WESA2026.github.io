@@ -948,3 +948,8 @@ html.op-on::before {
   margin-right: auto;
   outline: 0;
 }
+
+/* Gallery with an odd number of small photos: let the last one span the row */
+.gallery-mini > img:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
