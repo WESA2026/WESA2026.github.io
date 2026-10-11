@@ -12,7 +12,7 @@
     { name: "西早稲田", faculties: ["基幹理工学部", "創造理工学部", "先進理工学部"] },
     { name: "所沢", faculties: ["人間科学部", "スポーツ科学部"] }
   ];
-  var GENDERS = ["男性", "女性"];
+  var GENDERS = ["男性", "女性", "答えない"];
   var LINE_MESSAGE = "https://line.me/R/oaMessage/@980zymub/?";
 
   var root = document.getElementById("senpai-connect");

@@ -1076,6 +1076,11 @@ html.op-on::before {
   font-weight: 700;
   text-decoration: underline;
 }
+.lc-step-note {
+  margin: 0 0 0.5rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
 .lc-hint {
   display: flex;
   align-items: center;
