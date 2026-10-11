@@ -1006,3 +1006,80 @@ html.op-on::before {
   border-color: #06c755;
   color: #fff;
 }
+
+/* ---------- Join: connect with a senior of the same faculty (line-connect.js) ---------- */
+.line-connect {
+  margin-top: 1.2rem;
+  padding: 1.1rem 1.1rem 1.2rem;
+}
+.line-connect h3 { margin: 0; }
+.line-connect .lc-lead,
+.line-connect .lc-fallback { margin: 0.5rem 0 0; }
+.lc-form { margin-top: 0.4rem; }
+.lc-step {
+  margin: 0.8rem 0 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.lc-step legend {
+  padding: 0;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+.lc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.lc-chip { position: relative; }
+.lc-chip input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.lc-chip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 700;
+  cursor: pointer;
+}
+.lc-chip input:checked + span {
+  border-color: var(--wesa);
+  background: var(--wesa);
+  color: #fff;
+}
+.lc-chip input:focus-visible + span {
+  outline: 2px solid var(--wesa);
+  outline-offset: 2px;
+}
+.lc-preview {
+  margin: 0.9rem 0 0.6rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.lc-send[aria-disabled="true"] {
+  opacity: 0.45;
+  pointer-events: none;
+}
+.line-connect .lc-sub { margin: 0.8rem 0 0; }
+.line-connect .lc-sub a {
+  color: var(--wesa);
+  font-weight: 700;
+  text-decoration: underline;
+}
+.lc-hint {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+  color: var(--muted);
+}

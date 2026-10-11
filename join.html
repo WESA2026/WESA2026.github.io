@@ -92,6 +92,20 @@
           </div>
         </aside>
 
+        <section class="card line-connect" id="senpai-connect" aria-labelledby="lc-title">
+          <h3 id="lc-title">同じ学部の先輩とつながる</h3>
+          <p class="lc-lead">キャンパス・学部・性別を選んで、公式LINEに送ってね。<strong>同性の先輩</strong>が担当につきます。担当の先輩をLINEで追加したあとに、新歓グルに招待されます。</p>
+          <p class="lc-fallback">公式LINEで「先輩とつながる：学部・性別」（例：先輩とつながる：政治経済学部・女性）と送ってね。</p>
+          <div class="lc-form" hidden>
+            <fieldset class="lc-step"><legend>① キャンパス</legend><div class="lc-chips" data-lc="campus"></div></fieldset>
+            <fieldset class="lc-step"><legend>② 学部</legend><div class="lc-chips" data-lc="faculty"><p class="lc-hint">キャンパスを選ぶと表示されます</p></div></fieldset>
+            <fieldset class="lc-step"><legend>③ 性別</legend><div class="lc-chips" data-lc="gender"></div></fieldset>
+            <p class="lc-preview" aria-live="polite"></p>
+            <a class="btn btn-primary big-link-btn lc-send" aria-disabled="true" target="_blank" rel="noopener noreferrer">LINEで送る</a>
+          </div>
+          <p class="lc-sub">まだ友だち追加していない人は <a href="https://lin.ee/WOIaKqe" target="_blank" rel="noopener noreferrer">先に友だち追加</a></p>
+        </section>
+
         <div class="join-month-block">
           <h3 class="join-month-title">10月の新歓</h3>
           <div class="grid grid-3 join-welcome-grid">
@@ -164,5 +178,6 @@
   </aside>
 
   <script src="main.js" defer></script>
+  <script src="line-connect.js" defer></script>
 </body>
 </html>
