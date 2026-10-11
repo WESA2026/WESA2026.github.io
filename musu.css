@@ -1088,3 +1088,14 @@ html.op-on::before {
   margin: 0;
   color: var(--muted);
 }
+
+/* Events: show the whole photo (no crop) where a photo must not be trimmed */
+/* long names: split into even lines at natural points instead of leaving one character alone */
+.events-card h3.name-keep {
+  text-wrap: balance;
+  line-break: strict; /* no line may start with a long-vowel mark or small kana */
+}
+.events-card > .event-thumb.event-thumb-whole {
+  aspect-ratio: auto;
+  height: auto;
+}
