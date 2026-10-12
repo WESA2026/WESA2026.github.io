@@ -45,12 +45,6 @@ body {
   box-shadow: 0 1px 0 var(--line), 0 6px 20px rgba(27, 30, 39, 0.06);
 }
 
-.logo {
-  color: var(--wesa);
-  text-shadow: none;
-  letter-spacing: 0.14em;
-}
-
 .main-nav {
   scrollbar-width: none;
   overflow-y: hidden;

@@ -113,28 +113,6 @@ img {
   flex-wrap: nowrap;
 }
 
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-family: "Nunito", "Noto Sans JP", sans-serif;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  font-size: clamp(1.4rem, 2.25vw, 1.95rem);
-  line-height: 1;
-  color: #7a0014;
-  text-shadow: 0 1px 0 rgba(122, 0, 20, 0.1);
-}
-
-.logo img,
-.logo svg {
-  width: auto;
-  max-width: none;
-  height: clamp(26px, 1.95vw, 32px);
-  flex: 0 0 auto;
-  object-fit: contain;
-}
-
 .main-nav {
   display: flex;
   gap: 0.8rem;
@@ -3045,16 +3023,6 @@ th {
     min-height: auto;
     gap: 0.55rem 0.8rem;
     padding: 0.24rem 0 0.14rem;
-  }
-
-  .logo {
-    font-size: 1.35rem;
-    gap: 0.42rem;
-  }
-
-  .logo img,
-  .logo svg {
-    height: 24px;
   }
 
   .main-nav {
