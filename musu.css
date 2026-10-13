@@ -1219,7 +1219,8 @@ html.op-on::before {
 /* kicker with laurels, only on cards that have a result plate */
 .achievement-card:has(.achievement-result-win) .achievement-meta::before,
 .achievement-card:has(.achievement-result-runnerup) .achievement-meta::before,
-.achievement-card:has(.achievement-result-third) .achievement-meta::before {
+.achievement-card:has(.achievement-result-third) .achievement-meta::before,
+.achievement-card:has(.achievement-result-award) .achievement-meta::before {
   order: -2;
   display: block;
   margin-bottom: 0.7rem;
@@ -1242,9 +1243,15 @@ html.op-on::before {
   color: #6f7380;
 }
 
-.achievement-card:has(.achievement-result-third):not(:has(.achievement-result-win)) .achievement-meta::before {
+.achievement-card:has(.achievement-result-third):not(:has(.achievement-result-win)):not(:has(.achievement-result-runnerup)) .achievement-meta::before {
   content: "3RD PLACE";
   color: #8a5530;
+}
+
+/* any other prize (CHG-SITE-017): kicker AWARD, the prize name on a ribbon. Tiers: tools/site-build/achievements.json */
+.achievement-card:has(.achievement-result-award):not(:has(.achievement-result-win)):not(:has(.achievement-result-runnerup)):not(:has(.achievement-result-third)) .achievement-meta::before {
+  content: "AWARD";
+  color: var(--wesa);
 }
 
 .achievement-meta div {
@@ -1313,7 +1320,8 @@ html.op-on::before {
 
 .achievement-result-win,
 .achievement-result-runnerup,
-.achievement-result-third {
+.achievement-result-third,
+.achievement-result-award {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -1357,6 +1365,15 @@ html.op-on::before {
   background: linear-gradient(180deg, #f8e2cf, #e2b48c 55%, #cf9a6c);
   color: #4d2a10;
   box-shadow: 0 4px 12px rgba(120, 70, 30, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ribbon: notched ends, WESA red */
+.achievement-meta .achievement-result-award {
+  padding: 0.55rem 2rem 0.5rem;
+  border-radius: 0;
+  background: linear-gradient(180deg, #a52a45, var(--wesa) 60%, #74162a);
+  color: #fff;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 0.85rem) 50%, 100% 100%, 0 100%, 0.85rem 50%);
 }
 
 /* cards still waiting for content stay quiet */
