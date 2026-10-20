@@ -5,16 +5,16 @@
    ========================================================= */
 
 :root {
-  --wesa: #8c1c34;
-  --wesa-dark: #6a1426;
-  --wesa-tint: #f8eef0;
+  --wesa: var(--color-brand);
+  --wesa-dark: var(--color-brand-dark);
+  --wesa-tint: var(--color-brand-tint);
   --ink: #1b1e27;
   --ink-soft: #3d4250;
   --muted: #6b7080;
   --line: #e9e4e1;
   --bg: #faf8f6;
-  --surface: #ffffff;
-  --gold: #b8913e;
+  --surface: var(--color-white);
+  --gold: var(--color-gold);
   --radius: 16px;
   --radius-sm: 10px;
   --shadow-sm: 0 1px 2px rgba(27, 30, 39, 0.05), 0 2px 10px rgba(27, 30, 39, 0.05);
@@ -31,7 +31,7 @@ body {
 
 ::selection {
   background: var(--wesa);
-  color: #fff;
+  color: var(--color-white);
 }
 
 /* ---------- Header ---------- */
@@ -100,7 +100,7 @@ body {
 .page-officers .btn-primary {
   background: var(--wesa);
   border-color: var(--wesa);
-  color: #fff;
+  color: var(--color-white);
   animation: none;
 }
 
@@ -136,7 +136,7 @@ button:focus-visible {
 
 .section h2,
 .home-focus h2 {
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(1.6rem, 3.2vw, 2.25rem);
   font-weight: 800;
   letter-spacing: 0.01em;
@@ -173,7 +173,7 @@ button:focus-visible {
 
 /* ---------- Home: under the photo film ---------- */
 .home-legacy-text {
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: var(--font-body);
   font-weight: 800;
   color: var(--wesa);
   text-shadow: none;
@@ -240,11 +240,11 @@ button:focus-visible {
 
 .hero-watermark,
 .hero-watermark.luxe {
-  color: #fff;
-  -webkit-text-fill-color: #fff;
+  color: var(--color-white);
+  -webkit-text-fill-color: var(--color-white);
   -webkit-text-stroke: 0;
   background: none;
-  font-family: "Nunito", "Noto Sans JP", sans-serif;
+  font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: 0.04em;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
@@ -275,7 +275,7 @@ button:focus-visible {
 }
 
 .card h3 {
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(1.08rem, 1.9vw, 1.3rem);
   font-weight: 800;
   color: var(--ink);
@@ -351,7 +351,7 @@ a.card:hover,
 .home-focus .activities-card.lesson h3,
 .home-focus .events-card h3 {
   color: var(--ink);
-  font-family: "Nunito", "Noto Sans JP", sans-serif;
+  font-family: var(--font-display);
   letter-spacing: 0.01em;
 }
 
@@ -422,7 +422,7 @@ a.card:hover .pointer-mark::after,
 
 .step-card h3 {
   color: var(--wesa);
-  font-family: "Nunito", "Noto Sans JP", sans-serif;
+  font-family: var(--font-display);
   font-size: 0.95rem;
   letter-spacing: 0.08em;
 }
@@ -481,21 +481,21 @@ a.card:hover .pointer-mark::after,
 }
 
 .site-footer a {
-  color: #fff;
+  color: var(--color-white);
 }
 
 .footer-links a::after {
-  background: #fff;
+  background: var(--color-white);
 }
 
 .line-entry {
   border-color: rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.06);
-  color: #fff;
+  color: var(--color-white);
 }
 
 .line-entry span {
-  color: #fff;
+  color: var(--color-white);
 }
 
 /* ---------- Chat ---------- */
@@ -572,7 +572,7 @@ a.card:hover .pointer-mark::after,
 /* Home intro block */
 .hero .wesa-highlight,
 .hero h2.wesa-highlight {
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   line-height: 1.4;
   letter-spacing: 0.14em;
@@ -596,7 +596,7 @@ a.card:hover .pointer-mark::after,
   padding: 0;
   background: none;
   border-radius: 0;
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(1.7rem, 4vw, 2.75rem);
   line-height: 1.4;
   text-shadow: none;
@@ -768,7 +768,7 @@ a.card:hover .pointer-mark::after,
 }
 
 .deadline-badge {
-  color: #fff;
+  color: var(--color-white);
 }
 
 .page-officers .officers-list .officer-item:nth-child(n),
@@ -784,16 +784,16 @@ a.card:hover .pointer-mark::after,
 }
 
 .card .deadline-badge {
-  color: #fff;
+  color: var(--color-white);
   font-size: 0.95rem;
   box-shadow: none;
 }
 
 /* ---------- Retire the old cyan/pink accents everywhere ---------- */
 :root {
-  --accent-a: #8c1c34;
-  --accent-b: #b4475f;
-  --accent-c: #6a1426;
+  --accent-a: var(--color-brand);
+  --accent-b: var(--color-brand-soft);
+  --accent-c: var(--color-brand-dark);
 }
 
 .tab-btn[aria-selected="true"] {
@@ -814,7 +814,7 @@ a.card:hover .pointer-mark::after,
 
 .footer-links a:hover,
 .site-footer .footer-links a:hover {
-  color: #fff;
+  color: var(--color-white);
   opacity: 0.8;
 }
 
