@@ -13,13 +13,14 @@
 
   function iso(d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
   function nextDays(a, n) {
-    var out = [], d = new Date(); d.setHours(0, 0, 0, 0);
+    var out = [], d = new Date(), now = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2); d.setHours(0, 0, 0, 0);
     var want = a.weekdays.map(function (w) { return WD[w]; });
     for (var i = 0; i < 120 && out.length < n; i++, d.setDate(d.getDate() + 1)) {
       var s = iso(d);
       if (a.start && s < a.start) continue;
       if (a.end && s > a.end) break;
       if (want.indexOf(d.getDay()) < 0 || (a.skip || []).indexOf(s) >= 0) continue;
+      if (i === 0 && a.ends && now >= a.ends) continue;  // 今日の活動がもう終わっていれば出さない
       out.push((d.getMonth() + 1) + "/" + d.getDate() + "（" + JA[d.getDay()] + "）" + a.period);
     }
     return out;
