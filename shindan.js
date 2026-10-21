@@ -14,14 +14,16 @@
   function iso(d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
   function nextDays(a, n) {
     var out = [], d = new Date(), now = ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2); d.setHours(0, 0, 0, 0);
-    var want = a.weekdays.map(function (w) { return WD[w]; });
     for (var i = 0; i < 120 && out.length < n; i++, d.setDate(d.getDate() + 1)) {
       var s = iso(d);
       if (a.start && s < a.start) continue;
       if (a.end && s > a.end) break;
-      if (want.indexOf(d.getDay()) < 0 || (a.skip || []).indexOf(s) >= 0) continue;
-      if (i === 0 && a.ends && now >= a.ends) continue;  // 今日の活動がもう終わっていれば出さない
-      out.push((d.getMonth() + 1) + "/" + d.getDate() + "（" + JA[d.getDay()] + "）" + a.period);
+      if ((a.skip || []).indexOf(s) >= 0) continue;
+      a.slots.forEach(function (sl) {  // 曜日で時限が違う活動（例：Debate 火曜4・5限・金曜4限）は組ごとに見る
+        if (out.length >= n || sl.weekdays.map(function (w) { return WD[w]; }).indexOf(d.getDay()) < 0) return;
+        if (i === 0 && sl.ends && now >= sl.ends) return;  // 今日の活動がもう終わっていれば出さない
+        out.push((d.getMonth() + 1) + "/" + d.getDate() + "（" + JA[d.getDay()] + "）" + sl.period);
+      });
     }
     return out;
   }
@@ -34,7 +36,7 @@
     var h = document.createElement("h2"); h.textContent = "おすすめは「" + best.name + "」";
     var p = document.createElement("p"); p.textContent = best.blurb;
     var d = document.createElement("p"); d.className = "meta";
-    d.textContent = days.length ? "次に体験できる日：" + days.join("・") : "活動日：毎週 " + best.weekdays.map(function (w) { return JA[WD[w]]; }).join("・") + " " + best.period;
+    d.textContent = days.length ? "次に体験できる日：" + days.join("・") : "活動日：毎週 " + best.slots.map(function (sl) { return sl.weekdays.map(function (w) { return JA[WD[w]]; }).join("・") + " " + sl.period; }).join("、");
     var act = document.createElement("div"); act.className = "hero-actions";
     act.innerHTML = '<a class="btn btn-secondary" href="' + best.page + '">' + best.name + 'の詳細</a><a class="btn btn-primary" href="join.html#senpai-connect">先輩とつながる</a>';
     var again = document.createElement("button"); again.type = "button"; again.className = "chip"; again.textContent = "もう一度";

@@ -175,7 +175,7 @@ function setupAllChatPanels(base) {
       ]
     },
     frequency: {
-      text: "定例活動は毎週あります。Lesson：平日毎日3限／Discussion：月・木・金 3〜5限／Debate：金曜4限／Speech：金曜5限／英会話部：水曜4・5限（戸山キャンパス または オンライン）。好きな活動に参加できます。",
+      text: "定例活動は毎週あります。Lesson：平日毎日3限／Discussion：月・木・金 3〜5限／Debate：火曜4・5限・金曜4限／Speech：金曜5限／英会話部：水曜4・5限（戸山キャンパス または オンライン）。好きな活動に参加できます。",
       links: [
         { label: "Activities一覧", href: `${base}activities.html` },
         { label: "英会話部", href: `${base}eikaiwa.html` },
