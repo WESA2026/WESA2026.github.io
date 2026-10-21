@@ -1677,3 +1677,6 @@ html.op-on::before {
 
 /* ---- CHG-SITE-021：本文の最後の行に1文字だけ残らないようにする（対応ブラウザのみ。見出しの縦書きには効かせない）---- */
 main p,main li,main dd,main td,main h3{text-wrap:pretty}
+
+.nowrap{white-space:nowrap}
+@media (max-width:640px){main h2{text-wrap:balance}}
