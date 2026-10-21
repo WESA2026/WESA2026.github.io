@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自分に合う活動診断｜早稲田大学英語部（WESA）</title>
+  <meta name="description" content="4つの質問に答えると、WESAの活動（Lesson・英会話部・Discussion・Debate・Speech）からおすすめと、次に体験できる日がわかります。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://wesa2026.github.io/shindan.html">
+  <link rel="icon" href="https://wesa2026.github.io/WESA_icon.png" type="image/png">
+  <meta property="og:title" content="自分に合う活動診断｜早稲田大学英語部（WESA）">
+  <meta property="og:description" content="4つの質問に答えると、WESAの活動（Lesson・英会話部・Discussion・Debate・Speech）からおすすめと、次に体験できる日がわかります。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://wesa2026.github.io/shindan.html">
+  <meta property="og:site_name" content="早稲田大学英語部（WESA）">
+  <meta property="og:image" content="https://wesa2026.github.io/winter-camp-2026-group.jpg">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@wesa_shinkan">
+  <!--part:head--><link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap"></noscript>
+  <link rel="stylesheet" href="site.css?v=39cfc6fa"><!--/part-->
+</head>
+<body>
+  <!--part:header--><header class="site-header">
+    <div class="container header-row">
+      <a href="index.html" class="logo logo-with-mark">
+        <img class="logo-icon" src="WESA_icon.png" width="397" height="397" alt="" aria-hidden="true">
+        <span class="logo-text">WESA</span>
+      </a>
+      <nav class="main-nav" aria-label="主要ナビゲーション">
+        <a href="index.html">Home</a>
+        <a href="activities.html" aria-current="page">Activities</a>
+        <a href="events.html">Events</a>
+        <a href="join.html">Join</a>
+        <a href="chat.html">Chat</a>
+      </nav>
+      <div class="header-cta">
+        <a class="btn btn-secondary" href="join.html">新歓日程</a>
+        <a class="btn btn-primary" href="join.html">参加する</a>
+      </div>
+    </div>
+  </header><!--/part-->
+
+  <main>
+    <section class="section js-reveal">
+      <div class="container">
+        <div class="section-head">
+          <h1>自分に合う活動診断</h1>
+          <p>4つの質問に答えると、おすすめの活動と次に体験できる日がわかります。</p>
+        </div>
+        <div class="card quiz" id="quiz">
+          <noscript><p>診断にはJavaScriptが必要です。<a href="activities.html">活動一覧</a>から選んでください。</p></noscript>
+          <ol class="quiz-steps" data-quiz-steps></ol>
+          <div class="quiz-result" data-quiz-result hidden aria-live="polite"></div>
+        </div>
+        <!--list:quiz-data--><script type="application/json" id="quiz-data">{"questions":[{"q":"英語にどれくらい慣れている？","a":[{"t":"ほとんど話したことがない","s":{"lesson":3}},{"t":"少しなら話せる","s":{"lesson":1,"eikaiwa":2,"discussion":1}},{"t":"留学・帰国経験がある","s":{"eikaiwa":2,"discussion":2,"debate":1,"speech":1}}]},{"q":"やってみたいのは？","a":[{"t":"みんなでワイワイ遊びたい","s":{"lesson":2,"eikaiwa":2}},{"t":"自分の考えを人前で伝えたい","s":{"speech":3}},{"t":"ロジックで相手と勝負したい","s":{"debate":3}},{"t":"いろいろな意見を聞いて話したい","s":{"discussion":3}}]},{"q":"大会に出てみたい？","a":[{"t":"出てみたい","s":{"debate":2,"speech":2,"discussion":1}},{"t":"まだわからない","s":{"discussion":1,"eikaiwa":1}},{"t":"楽しく続けたい","s":{"lesson":2,"eikaiwa":1}}]},{"q":"参加しやすい時間は？","a":[{"t":"平日のお昼（3限）","s":{"lesson":2,"discussion":1}},{"t":"水曜の午後","s":{"eikaiwa":2}},{"t":"金曜の午後","s":{"debate":1,"speech":1,"discussion":1}},{"t":"いつでも","s":{}}]}],"activities":[{"key":"lesson","name":"Lesson","page":"lesson.html","weekdays":["Mon","Tue","Wed","Thu","Fri"],"period":"3限","blurb":"日本語メインでみんなで遊ぶ。英語がはじめてでも大丈夫","start":"2026-10-05","end":"2026-12-11","skip":["2026-10-19","2026-10-28"]},{"key":"eikaiwa","name":"英会話部","page":"eikaiwa.html","weekdays":["Wed"],"period":"4・5限","blurb":"英語だけでゲーム。中級者・留学経験者向け（戸山キャンパス または オンライン）"},{"key":"discussion","name":"Discussion","page":"discussion.html","weekdays":["Mon","Thu","Fri"],"period":"3〜5限","blurb":"テーマについて英語で意見を交わす"},{"key":"debate","name":"Debate","page":"debate.html","weekdays":["Fri"],"period":"4限","blurb":"論理で勝負する競技。大会あり"},{"key":"speech","name":"Speech","page":"speech.html","weekdays":["Fri"],"period":"5限","blurb":"自分の言葉で英語の発表。大会あり"}]}</script><!--/list-->
+      </div>
+    </section>
+  </main>
+
+  <!--part:footer--><footer class="site-footer">
+    <div class="container footer-row">
+      <div class="footer-links">
+        <a href="https://www.instagram.com/wesa_2026/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://x.com/wesa_shinkan" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="https://lin.ee/WOIaKqe" target="_blank" rel="noopener noreferrer">LINE</a>
+      </div>
+      <p>お問い合わせ: wesagoyaku76@gmail.com</p>
+      <p>活動場所: 早稲田大学 戸山キャンパス（学生会館 ほか）</p>
+    </div>
+  </footer><!--/part-->
+
+  <script src="main.js" defer></script>
+  <script src="shindan.js" defer></script>
+</body>
+</html>

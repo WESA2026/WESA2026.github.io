@@ -64,5 +64,15 @@
   send.addEventListener("click", function (e) { if (!send.href) e.preventDefault(); });
   form.hidden = false;
   root.querySelector(".lc-fallback").hidden = true;
+  // 先輩紹介（members.html）から ?faculty=<学部> で来たら、キャンパスと学部を選んだ状態にする（CHG-SITE-021）
+  var want = new URLSearchParams(location.search).get("faculty");
+  CAMPUSES.forEach(function (c) {
+    if (!want || c.faculties.indexOf(want) < 0) return;
+    var ci = campusBox.querySelector('input[value="' + c.name + '"]');
+    if (!ci) return;
+    ci.checked = true; ci.dispatchEvent(new Event("change"));
+    var fi = facultyBox.querySelector('input[value="' + want + '"]');
+    if (fi) { fi.checked = true; fi.dispatchEvent(new Event("change")); }
+  });
   update();
 })();
