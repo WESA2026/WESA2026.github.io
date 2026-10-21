@@ -1709,3 +1709,12 @@ main p,main li,main dd,main td,main h3{text-wrap:pretty}
 .quiz-cta-points li{border:1px solid var(--color-brand-tint);border-radius:999px;padding:.25rem .85rem;font-size:.9rem;white-space:nowrap}
 .btn.quiz-cta-btn{background:var(--color-white);color:var(--color-brand);border-color:var(--color-white);font-size:1.1rem;padding:.95rem 2.2rem;font-weight:700}
 .btn.quiz-cta-btn:hover{background:var(--color-brand-tint);color:var(--color-brand-dark)}
+
+/* ---- CHG-SITE-023：Googleカレンダーに追加 ---- */
+.cal-add{margin-top:1.4rem;padding:1.2rem;border:1px solid var(--color-brand-tint);border-left:4px solid var(--color-brand);border-radius:0;background:var(--color-white)}
+.cal-add-title{margin:0 0 .7rem;font-weight:700;color:var(--color-brand)}
+.cal-add-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:.6rem}
+.btn.cal-add-btn{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;text-align:left;padding:.75rem 1rem;white-space:normal}
+.cal-add-name{font-weight:700}
+.cal-add-when{font-size:.85rem;color:var(--color-muted)}
+.cal-add-sub{margin:.8rem 0 0;font-size:.88rem;color:var(--color-muted)}
