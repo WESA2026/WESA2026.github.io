@@ -1659,9 +1659,21 @@ html.op-on::before {
 .quiz-q{font-weight:700;font-size:1.1rem;margin:0 0 .8rem}
 .quiz-a{display:block;width:100%;text-align:left;margin:0 0 .5rem;padding:.8rem 1rem;font-size:1rem}
 .quiz-result h2{color:var(--color-brand);margin-top:0}
-.quiz-band{margin-top:1.4rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem}
+.quiz-band{margin-top:2.4rem;background:var(--color-brand-tint);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem}
 .quiz-band p{margin:0}
 .ig-card{display:flex;flex-direction:column;gap:.4rem;text-decoration:none;color:var(--color-ink);border-top:4px solid var(--color-brand)}
 .ig-meta{color:var(--color-muted);font-size:.85rem}
 .ig-title{font-weight:700;font-size:1.1rem}
 .ig-more{color:var(--color-brand);font-size:.9rem;margin-top:auto}
+
+/* ---- CHG-SITE-021：スマホ幅の表は「見出し：値」の縦並び（1文字ずつ折り返すのを防ぐ）---- */
+@media (max-width:640px){
+.table-wrap table.is-stack{min-width:0;width:100%}
+.table-wrap table.is-stack thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.table-wrap table.is-stack tr{display:block;padding:.6rem 0;border-bottom:1px solid var(--color-ink)}
+.table-wrap table.is-stack td,.lx .table-wrap table.is-stack td,.camp-page .table-wrap table.is-stack td{display:grid;grid-template-columns:6.5em 1fr;gap:.6rem;padding:.3rem 0;border:0}
+.table-wrap table.is-stack td::before{content:attr(data-label);font-weight:700;color:var(--color-muted)}
+}
+
+/* ---- CHG-SITE-021：本文の最後の行に1文字だけ残らないようにする（対応ブラウザのみ。見出しの縦書きには効かせない）---- */
+main p,main li,main dd,main td,main h3{text-wrap:pretty}
