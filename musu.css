@@ -1680,3 +1680,23 @@ main p,main li,main dd,main td,main h3{text-wrap:pretty}
 
 .nowrap{white-space:nowrap}
 @media (max-width:640px){main h2{text-wrap:balance}}
+
+/* ---- CHG-SITE-021：先輩とつながる→新歓グルの3ステップと学部の入口 ---- */
+.path-lead{margin:.2rem 0 1rem}
+.path-steps{list-style:none;padding:0;margin:0 0 1.2rem;display:grid;gap:1rem;grid-template-columns:repeat(3,minmax(0,1fr))}
+.path-step{display:flex;flex-direction:column;gap:.5rem}
+.path-step h3{margin:0}
+.path-step p{margin:0;flex:1}
+.path-step .btn{align-self:flex-start}
+.path-no{align-self:flex-start;flex:none;width:1.8rem;height:1.8rem;border-radius:50%;background:var(--color-brand);color:var(--color-white);display:flex;align-items:center;justify-content:center;font-weight:700}
+.faculty-grid{margin-bottom:1.6rem}
+.faculty-tile{display:flex;flex-direction:column;gap:.3rem;text-decoration:none;color:var(--color-ink);border-top:4px solid var(--color-brand)}
+.faculty-tile.is-wait{border-top-color:var(--color-muted)}
+.faculty-name{font-family:var(--font-heading-ja);font-size:1.2rem}
+.faculty-note{color:var(--color-muted);font-size:.88rem}
+.faculty-go{color:var(--color-brand);font-weight:700;font-size:.92rem;margin-top:auto}
+.member-head{margin-top:0}
+@media (max-width:760px){.path-steps{grid-template-columns:1fr}}
+
+#join-steps{scroll-margin-top:8rem}
+#senpai-connect{scroll-margin-top:7rem}
