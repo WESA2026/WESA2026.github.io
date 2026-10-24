@@ -191,7 +191,7 @@ function setupAllChatPanels(base) {
       ]
     },
     diff: {
-      text: "Lessonは日本語メインでみんなで遊ぶ活動、英会話部はLessonと競技活動の間で中級者・留学経験者向けに英語だけでゲームをする活動です。Debateは論理競技、Speechは発表、Discussionは対話（議論）が中心の競技活動です。",
+      text: "Lessonは日本語メインでみんなで遊ぶ活動、英会話部はLessonと競技活動の間で、英語だけでゲームをする活動です（留学を予定している人など大歓迎！）。Debateは論理競技、Speechは発表、Discussionは対話（議論）が中心の競技活動です。",
       links: [
         { label: "Activities一覧", href: `${base}activities.html` },
         { label: "英会話部", href: `${base}eikaiwa.html` },
