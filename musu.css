@@ -1718,3 +1718,20 @@ main p,main li,main dd,main td,main h3{text-wrap:pretty}
 .cal-add-name{font-weight:700}
 .cal-add-when{font-size:.85rem;color:var(--color-muted)}
 .cal-add-sub{margin:.8rem 0 0;font-size:.88rem;color:var(--color-muted)}
+/* UXフィードバック 2026-10-27：終了イベント・次回の体験日・ほかの活動・はじめての人へ */
+.event-badge{display:inline-block;margin:0 .45rem .2rem 0;padding:.12rem .55rem;border-radius:999px;font-size:.75rem;font-weight:700;line-height:1.5;vertical-align:middle;letter-spacing:.02em}
+.event-badge-next{background:var(--color-brand);color:var(--color-white)}
+.event-badge-ended{background:var(--color-muted);color:var(--color-white)}
+.is-ended{opacity:.6}
+.is-ended .event-thumb{filter:grayscale(1)}
+li.is-ended,tr.is-ended{text-decoration:line-through;text-decoration-color:var(--color-muted)}
+.next-try{margin:1.2rem 0 0;padding:1rem 1.2rem;border-left:4px solid var(--color-brand)}
+.next-try-title{margin:0 0 .3rem;font-weight:700;color:var(--color-brand)}
+.next-try-days{margin:0 0 .3rem;font-size:1.1rem;font-weight:700}
+.next-try .meta{margin:0}
+.other-acts{margin:1.6rem 0 0}
+.other-acts-title{margin:0 0 .5rem;font-weight:700}
+.other-acts-list{display:flex;flex-wrap:wrap;gap:.5rem}
+.path-note{margin:-.4rem 0 1rem;padding:.7rem 1rem;border-radius:12px;background:var(--color-brand-tint)}
+.first-timer{margin:2rem 0 0}
+.first-timer dd a{color:var(--color-brand);font-weight:700}

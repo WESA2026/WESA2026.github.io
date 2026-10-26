@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initChatWidget();
   initLightbox();
   initHomeFilmLoop();
+  initEventDates();
+  initNextDays();
 });
 
 function prefersReducedMotion() {
@@ -411,4 +413,62 @@ function runFilmLoop(rail, index) {
     }
   });
   observer.observe(rail.parentElement || rail);
+}
+
+// 終了したイベント（data-event-date が今日より前）に「終了」を付けて一覧の最後へ。
+// 一覧の中で最初に来る開催前のイベントには「次のイベント」を付ける
+function initEventDates() {
+  const d = new Date();
+  const today = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  document.querySelectorAll("[data-event-list]").forEach((list) => {
+    const items = [...list.children].filter((el) => el.dataset.eventDate);
+    const badge = (el, text, cls) => {
+      const b = document.createElement("span");
+      b.className = "event-badge " + cls;
+      b.textContent = text;
+      if (el.tagName === "TR") return;  // 表は列幅が変わるのでバッジを付けない（薄く・取り消し線で示す）
+      const slot = el.querySelector("h2, h3") || el;
+      slot.prepend(b);
+    };
+    items.filter((el) => el.dataset.eventDate < today).forEach((el) => {
+      el.classList.add("is-ended");
+      badge(el, "終了", "event-badge-ended");
+      list.appendChild(el);
+    });
+    const next = items.filter((el) => el.dataset.eventDate >= today).sort((a, b) => a.dataset.eventDate.localeCompare(b.dataset.eventDate))[0];
+    if (next) badge(next, next.dataset.eventDate === today ? "今日" : "次のイベント", "event-badge-next");
+  });
+}
+
+// 活動ページの「次に体験できる日」。曜日・期間は活動診断と同じデータ（shindan.html の #quiz-data）を使う
+function initNextDays() {
+  const box = document.querySelector("[data-next-days]");
+  if (!box || !window.fetch) return;
+  const WD = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }, JA = "日月火水木金土";
+  const iso = (d) => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  fetch("shindan.html")
+    .then((r) => r.text())
+    .then((html) => {
+      const el = new DOMParser().parseFromString(html, "text/html").getElementById("quiz-data");
+      const act = el && JSON.parse(el.textContent).activities.find((a) => a.key === box.dataset.nextDays);
+      if (!act) return;
+      const out = [], d = new Date();
+      const now = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+      d.setHours(0, 0, 0, 0);
+      for (let i = 0; i < 120 && out.length < 3; i++, d.setDate(d.getDate() + 1)) {
+        const s = iso(d);
+        if (act.start && s < act.start) continue;
+        if (act.end && s > act.end) break;
+        if ((act.skip || []).includes(s)) continue;
+        act.slots.forEach((sl) => {
+          if (out.length >= 3 || !sl.weekdays.some((w) => WD[w] === d.getDay())) return;
+          if (i === 0 && sl.ends && now >= sl.ends) return;
+          out.push((d.getMonth() + 1) + "/" + d.getDate() + "（" + JA[d.getDay()] + "）" + sl.period);
+        });
+      }
+      if (!out.length) return;
+      box.querySelector(".next-try-days").textContent = out.join("・");
+      box.hidden = false;
+    })
+    .catch(() => {});
 }

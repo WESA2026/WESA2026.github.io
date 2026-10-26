@@ -22,7 +22,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Nunito:wght@800&family=Shippori+Mincho:wght@700&display=swap"></noscript>
-  <link rel="stylesheet" href="site.css?v=58f819fd"><!--/part-->
+  <link rel="stylesheet" href="site.css?v=f69c471e"><!--/part-->
 </head>
 <body class="page-join">
   <!--part:header--><header class="site-header">
@@ -62,6 +62,7 @@
       <div class="container">
         <h2 id="join-steps">参加手順</h2>
         <p class="path-lead">WESAの新歓は、<strong>担当の先輩とつながって新歓グルに入る</strong>ところから。3ステップで参加できます。</p>
+        <p class="path-note"><strong>事前申込は不要</strong>です。ただし、教室など当日の詳細は公式LINEで案内するので、来る前に①の友だち追加だけは済ませておいてね。②③で担当の先輩とつながると、新歓グルにも招待されます。</p>
         <ol class="path-steps">
           <li class="card path-step"><span class="path-no">1</span><h3>公式LINEを友だち追加</h3><p>新歓の詳細は公式LINEで案内します。</p><a class="btn btn-primary" href="https://lin.ee/WOIaKqe" target="_blank" rel="noopener noreferrer">友だち追加</a></li>
           <li class="card path-step"><span class="path-no">2</span><h3>同じ学部の先輩とつながる</h3><p>学部と性別を送ると、担当の先輩のカードが届きます。</p><a class="btn btn-primary" href="#senpai-connect">学部を選んで送る</a></li>
@@ -73,10 +74,10 @@
           <img class="event-thumb deadline-thumb" src="transfer-ceremony-group.jpg" width="1280" height="647" alt="TRANSFER 2025 CEREMONYでのWESAの集合写真" loading="lazy" decoding="async">
           <h3>公式LINEを友だち追加</h3>
           <p class="deadline-copy"><!--d:join.note-->事前申込不要。詳細は公式LINEで案内します<!--/d--></p>
-          <ul class="deadline-meta">
+          <ul class="deadline-meta" data-event-list>
             <li><!--d:join.li.lesson-->Lesson：平日毎日 3限（10/05〜12/11）<!--/d--></li>
-            <li><!--d:join.li.picnic-->ピクニック：10/19（月）3〜4限・戸山公園（理工キャンパス側）・雨天中止<!--/d--></li>
-            <li><!--d:join.li.halloween-->ハロウィンパーティー：10/28（水）3限・戸山キャンパス 学生会館<!--/d--></li>
+            <li data-event-date="2026-10-19"><!--d:join.li.picnic-->ピクニック：10/19（月）3〜4限・戸山公園（理工キャンパス側）・雨天中止<!--/d--></li>
+            <li data-event-date="2026-10-28"><!--d:join.li.halloween-->ハロウィンパーティー：10/28（水）3限・戸山キャンパス 学生会館<!--/d--></li>
           </ul>
           <div class="external-entry deadline-entry">
             <span class="pointer-mark">今すぐ追加</span>
@@ -100,7 +101,7 @@
 
         <div class="join-month-block">
           <h3 class="join-month-title">10月の新歓</h3>
-          <div class="grid grid-3 join-welcome-grid">
+          <div class="grid grid-3 join-welcome-grid" data-event-list>
             <article class="card event-center">
               <img class="event-thumb" src="lesson-photo.jpg" width="1280" height="960" alt="Lessonでゲームを楽しむWESAのメンバー" loading="lazy" decoding="async">
               <h2>Lesson</h2>
@@ -111,7 +112,7 @@
                 <a class="btn btn-primary big-link-btn" href="https://lin.ee/WOIaKqe" target="_blank" rel="noopener noreferrer">詳細は公式LINEで</a>
               </div>
             </article>
-            <article class="card event-center">
+            <article class="card event-center" data-event-date="2026-10-19">
               <img class="event-thumb" src="shinkan-hanami.jpg" width="1280" height="906" alt="屋外で集まるWESAのメンバー（過去の新歓）" loading="lazy" decoding="async">
               <h2>ピクニック</h2>
               <h3><!--d:join.picnic.when-->日時：10/19（月）3〜4限<!--/d--></h3>
@@ -121,7 +122,7 @@
                 <a class="btn btn-primary big-link-btn" href="https://lin.ee/WOIaKqe" target="_blank" rel="noopener noreferrer">詳細は公式LINEで</a>
               </div>
             </article>
-            <article class="card event-center">
+            <article class="card event-center" data-event-date="2026-10-28">
               <img class="event-thumb" src="chat-members.jpg" width="1280" height="960" alt="教室で笑顔で写るWESAのメンバー" loading="lazy" decoding="async">
               <h2>ハロウィンパーティー</h2>
               <h3><!--d:join.halloween.when-->日時：10/28（水）3限<!--/d--></h3>
@@ -133,8 +134,15 @@
             </article>
           </div>
         </div>
-        <div class="hero-actions">
-        </div>
+        <section class="first-timer" aria-labelledby="first-timer-title">
+          <h2 id="first-timer-title">はじめて参加する人へ</h2>
+          <dl class="card">
+            <div class="faq-item"><dt>Q: 英語が苦手でも大丈夫？</dt><dd>A: 大丈夫！Lessonは日本語メインでみんなで遊ぶ活動です。英語がはじめてでも気軽に来てね。</dd></div>
+            <div class="faq-item"><dt>Q: ひとりで行っても浮かない？</dt><dd>A: 同じ学部の先輩が担当としてつきます。わからないことは担当の先輩か公式LINEに聞いてね。</dd></div>
+            <div class="faq-item"><dt>Q: 申込はいる？何回来てもいい？</dt><dd>A: 事前申込は不要です。5つの活動に、いつでも何度でも参加できます。</dd></div>
+            <div class="faq-item"><dt>Q: どの活動に行けばいい？</dt><dd>A: 迷ったら<a href="shindan.html">活動診断</a>（4問・約1分）で、おすすめの活動と次に体験できる日がわかります。</dd></div>
+          </dl>
+        </section>
       </div>
     </section>
   </main>
