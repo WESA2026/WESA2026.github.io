@@ -35,24 +35,53 @@ function initReveal() {
     return;
   }
 
+  const show = (node) => {
+    node.classList.add("is-visible");
+    const section = node.closest(".section");
+    if (section) section.classList.add("is-visible");
+  };
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-
-        entry.target.classList.add("is-visible");
-        const section = entry.target.closest(".section");
-        if (section) section.classList.add("is-visible");
         observer.unobserve(entry.target);
+        showWhenImagesReady(entry.target, show);
       });
     },
     {
-      threshold: 0.12,
+      // Start as soon as the top of a block comes into view, so tall sections do not sit blank
+      threshold: 0,
       rootMargin: "0px 0px -8% 0px"
     }
   );
 
   targets.forEach((node) => observer.observe(node));
+}
+
+// Play the reveal once the photos now on screen are ready, so the effect does not run on an
+// empty box. Waits at most 1.2s; photos further down the block are not waited for.
+function showWhenImagesReady(node, show) {
+  const limit = window.innerHeight * 1.2;
+  const pending = Array.from(node.querySelectorAll("img")).filter((img) => {
+    return !img.complete && img.getBoundingClientRect().top < limit;
+  });
+  if (!pending.length) {
+    show(node);
+    return;
+  }
+
+  let done = false;
+  const finish = () => {
+    if (done) return;
+    done = true;
+    show(node);
+  };
+  pending.forEach((img) => {
+    if (img.loading === "lazy") img.loading = "eager";
+  });
+  Promise.all(pending.map((img) => img.decode().catch(() => {}))).then(finish);
+  setTimeout(finish, 1200);
 }
 
 function initHeaderState() {
@@ -367,11 +396,9 @@ function initHomeFilmLoop() {
     });
   };
 
-  if (document.readyState === "complete") {
-    requestAnimationFrame(start);
-  } else {
-    window.addEventListener("load", () => requestAnimationFrame(start), { once: true });
-  }
+  // Start right away instead of waiting for every photo on the page; runFilmLoop
+  // re-measures the rail as each of its photos arrives
+  requestAnimationFrame(start);
 }
 
 function runFilmLoop(rail, index) {
