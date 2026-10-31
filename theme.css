@@ -590,7 +590,8 @@ a.card:hover .pointer-mark::after,
 }
 
 .hero-catchcopy,
-.hero h1.hero-catchcopy {
+.hero h1.hero-catchcopy,
+.hero h2.hero-catchcopy {
   display: block;
   width: auto;
   padding: 0;

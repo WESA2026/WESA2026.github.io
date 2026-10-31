@@ -426,7 +426,8 @@ input[data-chat-input],
 }
 
 .page-home .hero-catchcopy,
-.page-home .hero h1.hero-catchcopy {
+.page-home .hero h1.hero-catchcopy,
+.page-home .hero h2.hero-catchcopy {
   font-family: var(--mincho);
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -1735,3 +1736,12 @@ li.is-ended,tr.is-ended{text-decoration:line-through;text-decoration-color:var(-
 .path-note{margin:-.4rem 0 1rem;padding:.7rem 1rem;border-radius:12px;background:var(--color-brand-tint)}
 .first-timer{margin:2rem 0 0}
 .first-timer dd a{color:var(--color-brand);font-weight:700}
+
+/* ---------- Home: WESA name above the legacy line (CHG-SITE-029) ---------- */
+.page-home .home-legacy-name {
+  display: block;
+  margin-bottom: 0.5em;
+  color: var(--wesa);
+  font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+  letter-spacing: 0.2em;
+}
