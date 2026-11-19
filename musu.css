@@ -1791,3 +1791,15 @@ li.is-ended,tr.is-ended{text-decoration:line-through;text-decoration-color:var(-
     align-items: start;
   }
 }
+
+/* ---------- Home: Instagram cards with the post image (2026-11-20) ---------- */
+.ig-thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: contain; /* 投稿の全体を見せる（切り取らない） */
+  background: var(--color-paper);
+  border-radius: 10px;
+  margin-bottom: 0.3rem;
+}
