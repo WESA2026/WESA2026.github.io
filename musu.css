@@ -1745,3 +1745,49 @@ li.is-ended,tr.is-ended{text-decoration:line-through;text-decoration-color:var(-
   font-size: clamp(0.9rem, 1.5vw, 1.15rem);
   letter-spacing: 0.2em;
 }
+
+/* ---------- Waseda Cup page: sponsor card (CHG-SITE-031) ---------- */
+.sponsor-card {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+.sponsor-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.sponsor-name {
+  margin: 0 0 0.4em;
+  color: var(--color-brand);
+  font-family: var(--font-heading-ja);
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+}
+.sponsor-meta {
+  display: grid;
+  gap: 0.35rem;
+  margin: 1rem 0 0;
+}
+.sponsor-meta div {
+  display: grid;
+  grid-template-columns: 5.5em 1fr;
+  gap: 0.6rem;
+}
+.sponsor-meta dt {
+  color: var(--color-muted);
+}
+.sponsor-meta dd {
+  margin: 0;
+  font-weight: 700;
+}
+.waseda-cup-link {
+  margin: 1rem 0 0;
+  text-align: center;
+}
+@media (min-width: 900px) {
+  .sponsor-card {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: start;
+  }
+}
